@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Aquarium Show — Performance Tracker</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f3f7f9; color: #0f2b36; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 22px 18px 70px; }
+h1 { font-size: 20px; margin: 0; color: #07414f; }
+.sub { color: #5a7682; font-size: 13px; margin: 2px 0 0; }
+.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
+.kpi { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 14px; }
+.kpi .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6a8593; }
+.kpi .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: #07414f; }
+.kpi .meta { font-size: 11.5px; color: #6a8593; margin-top: 2px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.card { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+.card h2 { font-size: 14.5px; margin: 0 0 2px; color: #07414f; }
+.card .hint { font-size: 12px; color: #6a8593; margin: 0 0 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eef3f5; }
+th { color: #5a7682; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #e3f2f6; color: #0a5566; font-size: 11.5px; font-weight: 600; }
+.note { background: #fff7e6; border: 1px solid #f0d9a8; color: #7a5b13; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; margin: 12px 0; }
+.empty { color: #6a8593; font-size: 13px; padding: 6px 2px; }
+.foot { color: #8aa1ab; font-size: 11.5px; margin-top: 18px; text-align: center; }
+@media (max-width: 880px){ .kpis{ grid-template-columns: repeat(2,1fr);} .grid2{ grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
+  <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
+
+  <div class="note" id="srcnote" style="display:none"></div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Total sales (12mo)</div><div class="value" id="k-sales">—</div><div class="meta">trailing 12 months</div></div>
+    <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta">trailing 12 months</div></div>
+    <div class="kpi"><div class="label">Avg order value</div><div class="value" id="k-aov">—</div><div class="meta">&nbsp;</div></div>
+    <div class="kpi"><div class="label">Conversion rate</div><div class="value" id="k-cvr">—</div><div class="meta">sessions to checkout</div></div>
+    <div class="kpi"><div class="label">Top channel</div><div class="value" id="k-chan">—</div><div class="meta" id="k-chan-m">&nbsp;</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>Revenue &amp; orders trend</h2><p class="hint">Total sales (bars) and orders (line), by month.</p><canvas id="trendChart" height="150"></canvas></div>
+    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>Coral species &amp; type</h2><p class="hint">Gross sales by type, parsed from product titles.</p><canvas id="specChart" height="150"></canvas></div>
+    <div class="card"><h2>Marketing channels</h2><p class="hint">Attributed sales by referrer (Meta / Google / IG).</p><canvas id="chanChart" height="150"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h2>Top products</h2><p class="hint">Best sellers by gross sales.</p>
+    <table id="prodTable"><thead><tr><th>Product</th><th>Species/Type</th><th class="num">Gross</th><th class="num">Net</th><th class="num">Orders</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h2>Species sold-together</h2><p class="hint">Coral types co-occurring in the same order.</p>
+      <div id="pairEmpty" class="empty" style="display:none"></div>
+      <table id="pairTable"><thead><tr><th>Type A</th><th>Type B</th><th class="num">Orders together</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div class="card"><h2>Species by type — ranked</h2><p class="hint">Gross sales, orders, and product count by coral type.</p>
+      <table id="specTable"><thead><tr><th>Species/Type</th><th class="num">Gross</th><th class="num">Orders</th><th class="num">Products</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <div class="foot" id="foot">—</div>
+</div>
+
+<script>
+const C = { teal:"#0a91a8", deep:"#07414f", coral:"#ff7a59", green:"#2a9d8f" };
+const money = v => "$" + (Number(v)||0).toLocaleString(undefined,{maximumFractionDigits:0});
+const money2 = v => "$" + (Number(v)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const intf = v => (Number(v)||0).toLocaleString();
+const mlabel = s => { const [y,m]=s.split("-"); return new Date(+y,+m-1,1).toLocaleDateString(undefined,{month:"short",year:"2-digit"}); };
+let chart = {};
+function mk(id,cfg){ if(chart[id]) chart[id].destroy(); chart[id]=new Chart(document.getElementById(id),cfg); }
+
+async function loadData(){
+  let d;
+  try { d = await (await fetch("./data.json?ts="+Date.now())).json(); }
+  catch(e){ document.getElementById("foot").textContent = "Could not load data.json: "+e.message; return; }
+
+  document.getElementById("gen").textContent = "updated " + new Date(d.meta.generatedAt).toLocaleDateString();
+  if(d.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent = d.meta.source; }
+
+  document.getElementById("k-sales").textContent = money(d.kpis.totalSales);
+  document.getElementById("k-orders").textContent = intf(d.kpis.orders);
+  document.getElementById("k-aov").textContent = money2(d.kpis.aov);
+  document.getElementById("k-cvr").textContent = (Number(d.kpis.conversionRate)||0).toFixed(2)+"%";
+  if(d.kpis.topChannel){ document.getElementById("k-chan").textContent = d.kpis.topChannel.label; document.getElementById("k-chan-m").textContent = money(d.kpis.topChannel.sales)+" · "+intf(d.kpis.topChannel.orders)+" orders"; }
+
+  mk("trendChart",{ data:{ labels:d.trend.map(r=>mlabel(r.month)), datasets:[
+    {type:"bar",label:"Total sales",data:d.trend.map(r=>r.totalSales),backgroundColor:C.teal,yAxisID:"y",order:2},
+    {type:"line",label:"Orders",data:d.trend.map(r=>r.orders),borderColor:C.coral,backgroundColor:C.coral,yAxisID:"y1",tension:.3,order:1}
+  ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:"left",ticks:{callback:v=>"$"+(v/1000)+"k"}},y1:{position:"right",grid:{drawOnChartArea:false}}}}});
+
+  mk("sessChart",{ data:{ labels:d.traffic.map(r=>mlabel(r.month)), datasets:[
+    {type:"bar",label:"Sessions",data:d.traffic.map(r=>r.sessions),backgroundColor:C.green,yAxisID:"y",order:2},
+    {type:"line",label:"Conversion %",data:d.traffic.map(r=>r.cvr),borderColor:C.deep,backgroundColor:C.deep,yAxisID:"y1",tension:.3,order:1}
+  ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:"left"},y1:{position:"right",grid:{drawOnChartArea:false},ticks:{callback:v=>v+"%"}}}}});
+
+  const sp = (d.species||[]).slice(0,10);
+  mk("specChart",{ type:"bar", data:{ labels:sp.map(r=>r.label), datasets:[{label:"Gross sales",data:sp.map(r=>r.gross),backgroundColor:C.coral}]},
+    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
+
+  const ch = (d.channels||[]).slice().sort((a,b)=>b.sales-a.sales).slice(0,8);
+  mk("chanChart",{ type:"bar", data:{ labels:ch.map(r=>r.label), datasets:[{label:"Attributed sales",data:ch.map(r=>r.sales),backgroundColor:C.teal}]},
+    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
+
+  document.querySelector("#prodTable tbody").innerHTML = (d.topProducts||[]).map(r=>
+    "<tr><td>"+r.title+"</td><td><span class='pill'>"+r.species+"</span></td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+money2(r.net)+"</td><td class='num'>"+intf(r.orders)+"</td></tr>").join("");
+
+  document.querySelector("#specTable tbody").innerHTML = (d.species||[]).map(r=>
+    "<tr><td>"+r.label+"</td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+intf(r.orders)+"</td><td class='num'>"+intf(r.products)+"</td></tr>").join("");
+
+  if(!d.pairs || d.pairs.length===0){ document.getElementById("pairTable").style.display="none"; const e=document.getElementById("pairEmpty"); e.style.display="block"; e.textContent="Populates when the next version is built (needs full order line items)."; }
+  else { document.querySelector("#pairTable tbody").innerHTML = d.pairs.map(p=>"<tr><td>"+p.a+"</td><td>"+p.b+"</td><td class='num'>"+p.n+"</td></tr>").join(""); }
+
+  document.getElementById("foot").textContent = "Aquarium Show · data as of "+new Date(d.meta.generatedAt).toLocaleDateString();
+}
+loadData();
+</script>
+</body>
+</html>
