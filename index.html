@@ -12,8 +12,12 @@
 * { box-sizing: border-box; }
 body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f3f7f9; color: #0f2b36; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 18px 70px; }
+header.top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 h1 { font-size: 20px; margin: 0; color: #07414f; }
 .sub { color: #5a7682; font-size: 13px; margin: 2px 0 0; }
+.controls { display: flex; align-items: center; gap: 8px; }
+.controls label { font-size: 12.5px; color: #5a7682; }
+select { padding: 7px 10px; border: 1px solid #c5d6dd; border-radius: 8px; background: #fff; font-size: 13px; color: #0f2b36; }
 .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
 .kpi { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 14px; }
 .kpi .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6a8593; }
@@ -36,14 +40,24 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 </head>
 <body>
 <div class="wrap">
-  <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
-  <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
+  <header class="top">
+    <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
+    <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
+    <div class="controls">
+      <label for="range">Window</label>
+      <select id="range">
+        <option value="3">Last 3 months</option>
+        <option value="6">Last 6 months</option>
+        <option value="12">Last 12 months</option>
+      </select>
+    </div>
+  </header>
 
   <div class="note" id="srcnote" style="display:none"></div>
 
   <div class="kpis">
-    <div class="kpi"><div class="label">Total sales (12mo)</div><div class="value" id="k-sales">—</div><div class="meta">trailing 12 months</div></div>
-    <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta">trailing 12 months</div></div>
+    <div class="kpi"><div class="label">Total sales</div><div class="value" id="k-sales">—</div><div class="meta" id="k-sales-m">&nbsp;</div></div>
+    <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta" id="k-orders-m">&nbsp;</div></div>
     <div class="kpi"><div class="label">Avg order value</div><div class="value" id="k-aov">—</div><div class="meta">&nbsp;</div></div>
     <div class="kpi"><div class="label">Conversion rate</div><div class="value" id="k-cvr">—</div><div class="meta">sessions to checkout</div></div>
     <div class="kpi"><div class="label">Top channel</div><div class="value" id="k-chan">—</div><div class="meta" id="k-chan-m">&nbsp;</div></div>
@@ -83,19 +97,18 @@ const money = v => "$" + (Number(v)||0).toLocaleString(undefined,{maximumFractio
 const money2 = v => "$" + (Number(v)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const intf = v => (Number(v)||0).toLocaleString();
 const mlabel = s => { const [y,m]=s.split("-"); return new Date(+y,+m-1,1).toLocaleDateString(undefined,{month:"short",year:"2-digit"}); };
+const wlabel = k => ({"3":"last 3 months","6":"last 6 months","12":"last 12 months"})[k]||"";
 let chart = {};
+let DATA = null;
 function mk(id,cfg){ if(chart[id]) chart[id].destroy(); chart[id]=new Chart(document.getElementById(id),cfg); }
 
-async function loadData(){
-  let d;
-  try { d = await (await fetch("./data.json?ts="+Date.now())).json(); }
-  catch(e){ document.getElementById("foot").textContent = "Could not load data.json: "+e.message; return; }
-
-  document.getElementById("gen").textContent = "updated " + new Date(d.meta.generatedAt).toLocaleDateString();
-  if(d.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent = d.meta.source; }
-
+function render(key){
+  const d = DATA.windows[key]; if(!d) return;
+  const wl = wlabel(key);
   document.getElementById("k-sales").textContent = money(d.kpis.totalSales);
+  document.getElementById("k-sales-m").textContent = wl;
   document.getElementById("k-orders").textContent = intf(d.kpis.orders);
+  document.getElementById("k-orders-m").textContent = wl;
   document.getElementById("k-aov").textContent = money2(d.kpis.aov);
   document.getElementById("k-cvr").textContent = (Number(d.kpis.conversionRate)||0).toFixed(2)+"%";
   if(d.kpis.topChannel){ document.getElementById("k-chan").textContent = d.kpis.topChannel.label; document.getElementById("k-chan-m").textContent = money(d.kpis.topChannel.sales)+" · "+intf(d.kpis.topChannel.orders)+" orders"; }
@@ -125,9 +138,22 @@ async function loadData(){
     "<tr><td>"+r.label+"</td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+intf(r.orders)+"</td><td class='num'>"+intf(r.products)+"</td></tr>").join("");
 
   if(!d.pairs || d.pairs.length===0){ document.getElementById("pairTable").style.display="none"; const e=document.getElementById("pairEmpty"); e.style.display="block"; e.textContent="Populates when the next version is built (needs full order line items)."; }
-  else { document.querySelector("#pairTable tbody").innerHTML = d.pairs.map(p=>"<tr><td>"+p.a+"</td><td>"+p.b+"</td><td class='num'>"+p.n+"</td></tr>").join(""); }
+  else { document.getElementById("pairTable").style.display="table"; document.getElementById("pairEmpty").style.display="none"; document.querySelector("#pairTable tbody").innerHTML = d.pairs.map(p=>"<tr><td>"+p.a+"</td><td>"+p.b+"</td><td class='num'>"+p.n+"</td></tr>").join(""); }
+}
 
-  document.getElementById("foot").textContent = "Aquarium Show · data as of "+new Date(d.meta.generatedAt).toLocaleDateString();
+async function loadData(){
+  try { DATA = await (await fetch("./data.json?ts="+Date.now())).json(); }
+  catch(e){ document.getElementById("foot").textContent = "Could not load data.json: "+e.message; return; }
+  document.getElementById("gen").textContent = "updated " + new Date(DATA.meta.generatedAt).toLocaleDateString();
+  if(DATA.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent = DATA.meta.source; }
+  document.getElementById("foot").textContent = "Aquarium Show · data as of "+new Date(DATA.meta.generatedAt).toLocaleDateString();
+
+  let key = DATA.defaultWindow || "12";
+  try { const saved = localStorage.getItem("as_range"); if(saved && DATA.windows[saved]) key = saved; } catch(e){}
+  const sel = document.getElementById("range");
+  sel.value = key;
+  sel.addEventListener("change", e=>{ try{ localStorage.setItem("as_range", e.target.value); }catch(_){ } render(e.target.value); });
+  render(key);
 }
 loadData();
 </script>
