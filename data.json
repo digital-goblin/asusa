@@ -9,10 +9,10 @@
   "windows": {
     "3": {
       "kpis": {
-        "totalSales": 26555.89,
-        "orders": 103,
-        "aov": 257.83,
-        "conversionRate": 0.34,
+        "totalSales": 27973.82,
+        "orders": 107,
+        "aov": 261.44,
+        "conversionRate": 0.35,
         "topChannel": {
           "label": "Facebook",
           "sales": 7951.79,
@@ -37,8 +37,8 @@
         },
         {
           "month": "2026-06",
-          "orders": 6,
-          "totalSales": 2785.36
+          "orders": 12,
+          "totalSales": 4435.99
         }
       ],
       "traffic": [
@@ -59,7 +59,7 @@
         },
         {
           "month": "2026-06",
-          "sessions": 1032,
+          "sessions": 1912,
           "cvr": 0.58
         }
       ],
@@ -465,8 +465,8 @@
         },
         {
           "month": "2026-06",
-          "orders": 6,
-          "totalSales": 2785.36
+          "orders": 12,
+          "totalSales": 4435.99
         }
       ],
       "traffic": [
@@ -502,7 +502,7 @@
         },
         {
           "month": "2026-06",
-          "sessions": 1032,
+          "sessions": 1912,
           "cvr": 0.58
         }
       ],
@@ -864,14 +864,14 @@
     },
     "12": {
       "kpis": {
-        "totalSales": 66259.58,
-        "orders": 239,
-        "aov": 277.24,
+        "totalSales": 67910.21,
+        "orders": 245,
+        "aov": 277.18,
         "conversionRate": 0.28,
         "topChannel": {
           "label": "Facebook",
-          "sales": 21023.58,
-          "orders": 77
+          "sales": 21183.55,
+          "orders": 78
         }
       },
       "trend": [
@@ -932,8 +932,8 @@
         },
         {
           "month": "2026-06",
-          "orders": 6,
-          "totalSales": 2785.36
+          "orders": 12,
+          "totalSales": 4435.99
         }
       ],
       "traffic": [
@@ -994,31 +994,31 @@
         },
         {
           "month": "2026-06",
-          "sessions": 1032,
+          "sessions": 1912,
           "cvr": 0.58
         }
       ],
       "topProducts": [
         {
-          "title": "Walt Disney Acropora Coral",
-          "species": "Acropora",
-          "gross": 1194,
-          "net": 1163.38,
-          "orders": 6
+          "title": "WYSIWYG Hammer Coral Garden",
+          "species": "Hammer (Euphyllia)",
+          "gross": 1383.0,
+          "net": 1376.74,
+          "orders": 4
         },
         {
           "title": "Rainbow Bubble Tip Anemone",
           "species": "Anemone",
-          "gross": 1169.87,
-          "net": 1149.06,
-          "orders": 11
+          "gross": 1259.86,
+          "net": 1231.54,
+          "orders": 12
         },
         {
-          "title": "WYSIWYG Hammer Coral Garden",
-          "species": "Hammer (Euphyllia)",
-          "gross": 1133,
-          "net": 1133,
-          "orders": 3
+          "title": "Walt Disney Acropora Coral",
+          "species": "Acropora",
+          "gross": 1194.0,
+          "net": 1163.38,
+          "orders": 6
         },
         {
           "title": "AS Rainbow Tenuis Coral",
@@ -1030,29 +1030,29 @@
         {
           "title": "Hammer Euphyllia Coral Combo",
           "species": "Hammer (Euphyllia)",
-          "gross": 956,
+          "gross": 956.0,
           "net": 900.7,
           "orders": 4
         },
         {
           "title": "TSA Peter Pan Acropora Coral",
           "species": "Acropora",
-          "gross": 954,
+          "gross": 954.0,
           "net": 946.72,
           "orders": 6
         },
         {
           "title": "3x Mystery Hammer Coral Pack",
           "species": "Hammer (Euphyllia)",
-          "gross": 952,
+          "gross": 952.0,
           "net": 940.1,
           "orders": 8
         },
         {
           "title": "Dragon Tamer Torch Coral",
           "species": "Torch (Euphyllia)",
-          "gross": 840,
-          "net": 828,
+          "gross": 840.0,
+          "net": 828.0,
           "orders": 7
         },
         {
@@ -1065,14 +1065,14 @@
         {
           "title": "Cherry Bomb Acro Coral",
           "species": "Acropora",
-          "gross": 596,
-          "net": 596,
+          "gross": 596.0,
+          "net": 596.0,
           "orders": 4
         },
         {
           "title": "TSA Holy Grail Torch Coral",
           "species": "Torch (Euphyllia)",
-          "gross": 578,
+          "gross": 578.0,
           "net": 549.1,
           "orders": 2
         },
@@ -1100,7 +1100,7 @@
         {
           "title": "Green Soul Torch Coral",
           "species": "Torch (Euphyllia)",
-          "gross": 531,
+          "gross": 531.0,
           "net": 519.2,
           "orders": 9
         },
@@ -1117,6 +1117,13 @@
           "gross": 459.94,
           "net": 449.44,
           "orders": 6
+        },
+        {
+          "title": "WYSIWYG Zoanthid Coral Garden",
+          "species": "Zoanthid / Paly",
+          "gross": 447.0,
+          "net": 443.26,
+          "orders": 3
         },
         {
           "title": "JF Azz Krak Zoanthids Coral",
@@ -1142,8 +1149,8 @@
         {
           "title": "Bowzer Zoanthids Coral",
           "species": "Zoanthid / Paly",
-          "gross": 400,
-          "net": 394,
+          "gross": 400.0,
+          "net": 394.0,
           "orders": 10
         },
         {
@@ -1156,29 +1163,29 @@
         {
           "title": "Utter Chaos Zoanthids Coral",
           "species": "Zoanthid / Paly",
-          "gross": 395,
+          "gross": 395.0,
           "net": 387.5,
           "orders": 6
         },
         {
           "title": "Blowtorch Torch Coral",
           "species": "Torch (Euphyllia)",
-          "gross": 358,
+          "gross": 358.0,
           "net": 340.1,
           "orders": 2
-        },
-        {
-          "title": "Ultra Alveopora Coral Frag",
-          "species": "Goniopora / Alveopora",
-          "gross": 349.95,
-          "net": 343.77,
-          "orders": 5
         },
         {
           "title": "OG Purple Tip Hammer Coral",
           "species": "Hammer (Euphyllia)",
           "gross": 349.95,
           "net": 269.46,
+          "orders": 5
+        },
+        {
+          "title": "Ultra Alveopora Coral Frag",
+          "species": "Goniopora / Alveopora",
+          "gross": 349.95,
+          "net": 343.77,
           "orders": 5
         },
         {
@@ -1201,44 +1208,37 @@
           "gross": 329.89,
           "net": 283.41,
           "orders": 10
-        },
-        {
-          "title": "AS Acropora Lokani Coral",
-          "species": "Acropora",
-          "gross": 319.96,
-          "net": 311.97,
-          "orders": 4
         }
       ],
       "species": [
         {
           "label": "Acropora",
-          "gross": 9982.15,
-          "orders": 115,
-          "products": 27
+          "gross": 9543.21,
+          "orders": 108,
+          "products": 24
         },
         {
           "label": "Zoanthid / Paly",
-          "gross": 6975.83,
-          "orders": 156,
-          "products": 29
+          "gross": 6224.95,
+          "orders": 137,
+          "products": 22
         },
         {
           "label": "Hammer (Euphyllia)",
-          "gross": 4038.88,
-          "orders": 29,
+          "gross": 4288.88,
+          "orders": 30,
           "products": 6
         },
         {
           "label": "Torch (Euphyllia)",
-          "gross": 2875.0,
-          "orders": 22,
-          "products": 6
+          "gross": 3034.0,
+          "orders": 23,
+          "products": 7
         },
         {
           "label": "Anemone",
-          "gross": 1487.87,
-          "orders": 13,
+          "gross": 1577.86,
+          "orders": 14,
           "products": 2
         },
         {
@@ -1255,20 +1255,14 @@
         },
         {
           "label": "Montipora",
-          "gross": 682.21,
-          "orders": 18,
-          "products": 2
+          "gross": 557.25,
+          "orders": 14,
+          "products": 1
         },
         {
           "label": "Favia / Brain",
           "gross": 524.96,
           "orders": 5,
-          "products": 2
-        },
-        {
-          "label": "Cyphastrea",
-          "gross": 496.63,
-          "orders": 10,
           "products": 2
         },
         {
@@ -1290,16 +1284,10 @@
           "products": 1
         },
         {
-          "label": "Chalice",
-          "gross": 346.97,
-          "orders": 6,
-          "products": 2
-        },
-        {
-          "label": "Leptoseris / Leptastrea",
-          "gross": 309.91,
-          "orders": 9,
-          "products": 2
+          "label": "Cyphastrea",
+          "gross": 346.66,
+          "orders": 7,
+          "products": 1
         },
         {
           "label": "Scoly",
@@ -1315,8 +1303,14 @@
         },
         {
           "label": "Toadstool / Leather",
-          "gross": 179.98,
-          "orders": 2,
+          "gross": 269.97,
+          "orders": 3,
+          "products": 1
+        },
+        {
+          "label": "Chalice",
+          "gross": 217.97,
+          "orders": 5,
           "products": 1
         },
         {
@@ -1326,15 +1320,9 @@
           "products": 1
         },
         {
-          "label": "Pavona",
-          "gross": 134.97,
-          "orders": 3,
-          "products": 1
-        },
-        {
-          "label": "Blastomussa",
-          "gross": 119.98,
-          "orders": 2,
+          "label": "Leptoseris / Leptastrea",
+          "gross": 159.96,
+          "orders": 4,
           "products": 1
         }
       ],
@@ -1342,13 +1330,13 @@
       "channels": [
         {
           "label": "Facebook",
-          "sales": 21023.58,
-          "orders": 77
+          "sales": 21183.55,
+          "orders": 78
         },
         {
           "label": "Direct / Unknown",
-          "sales": 31759.95,
-          "orders": 115
+          "sales": 33250.61,
+          "orders": 120
         },
         {
           "label": "Google",
