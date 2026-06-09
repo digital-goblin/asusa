@@ -3,7 +3,7 @@
     "store": "Aquarium Show (aquariumshowusa.com)",
     "generatedAt": "2026-06-08T00:00:00Z",
     "currency": "USD",
-    "source": "Built from Shopify. Fish-tank / hardware purchases excluded (orders #1141 REEFER MAX, #1021 Red Sea 170 setup, #1073 Reef Edge 70 \u2014 3 orders, ~$8.4K). Species & products reflect catalogued items; some one-off/archived items aren't itemized. Use the window selector to switch range."
+    "source": "Built from Shopify + Meta Ads (Windsor.ai, account 'Aquarium Show Sunrise'). Fish-tank/hardware orders excluded (#1141,#1021,#1073). Axolotl items excluded (none currently). Date range drives sales + ad-spend KPIs (day precision); species/products/channels use the 3/6/12-month windows."
   },
   "defaultWindow": "12",
   "windows": {
@@ -1365,5 +1365,1863 @@
         }
       ]
     }
-  }
+  },
+  "daily": [
+    {
+      "date": "2025-06-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 9.27
+    },
+    {
+      "date": "2025-06-27",
+      "sales": 0,
+      "orders": 0,
+      "spend": 10.4
+    },
+    {
+      "date": "2025-06-28",
+      "sales": 0,
+      "orders": 0,
+      "spend": 9.81
+    },
+    {
+      "date": "2025-06-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 12.58
+    },
+    {
+      "date": "2025-06-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 9.19
+    },
+    {
+      "date": "2025-07-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 9.8
+    },
+    {
+      "date": "2025-07-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 8.77
+    },
+    {
+      "date": "2025-07-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 10.09
+    },
+    {
+      "date": "2025-07-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 8.82
+    },
+    {
+      "date": "2025-07-05",
+      "sales": 0,
+      "orders": 0,
+      "spend": 7.19
+    },
+    {
+      "date": "2025-07-19",
+      "sales": 289.0,
+      "orders": 1,
+      "spend": 0.0
+    },
+    {
+      "date": "2025-07-31",
+      "sales": 234.96,
+      "orders": 1,
+      "spend": 0.0
+    },
+    {
+      "date": "2025-08-02",
+      "sales": 275.54,
+      "orders": 1,
+      "spend": 0.0
+    },
+    {
+      "date": "2025-08-06",
+      "sales": 318.97,
+      "orders": 1,
+      "spend": 0.0
+    },
+    {
+      "date": "2025-08-14",
+      "sales": 318.0,
+      "orders": 1,
+      "spend": 0.0
+    },
+    {
+      "date": "2025-08-23",
+      "sales": 0,
+      "orders": 0,
+      "spend": 9.07
+    },
+    {
+      "date": "2025-08-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 10.51
+    },
+    {
+      "date": "2025-08-25",
+      "sales": 0,
+      "orders": 0,
+      "spend": 25.32
+    },
+    {
+      "date": "2025-08-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 31.2
+    },
+    {
+      "date": "2025-08-27",
+      "sales": 189.97,
+      "orders": 1,
+      "spend": 27.74
+    },
+    {
+      "date": "2025-08-28",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.13
+    },
+    {
+      "date": "2025-08-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 22.14
+    },
+    {
+      "date": "2025-08-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 16.49
+    },
+    {
+      "date": "2025-08-31",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.84
+    },
+    {
+      "date": "2025-09-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 21.77
+    },
+    {
+      "date": "2025-09-02",
+      "sales": 958.0,
+      "orders": 1,
+      "spend": 19.44
+    },
+    {
+      "date": "2025-09-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 19.93
+    },
+    {
+      "date": "2025-09-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 25.3
+    },
+    {
+      "date": "2025-09-05",
+      "sales": 0,
+      "orders": 0,
+      "spend": 15.29
+    },
+    {
+      "date": "2025-09-06",
+      "sales": 377.98,
+      "orders": 1,
+      "spend": 14.52
+    },
+    {
+      "date": "2025-09-07",
+      "sales": 173.24,
+      "orders": 1,
+      "spend": 16.84
+    },
+    {
+      "date": "2025-09-08",
+      "sales": 0,
+      "orders": 0,
+      "spend": 37.74
+    },
+    {
+      "date": "2025-09-09",
+      "sales": -56.69,
+      "orders": 1,
+      "spend": 36.36
+    },
+    {
+      "date": "2025-09-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 35.77
+    },
+    {
+      "date": "2025-09-11",
+      "sales": 89.98,
+      "orders": 1,
+      "spend": 34.03
+    },
+    {
+      "date": "2025-09-12",
+      "sales": 0,
+      "orders": 0,
+      "spend": 32.55
+    },
+    {
+      "date": "2025-09-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 51.24
+    },
+    {
+      "date": "2025-09-14",
+      "sales": 317.0,
+      "orders": 1,
+      "spend": 60.31
+    },
+    {
+      "date": "2025-09-15",
+      "sales": 0,
+      "orders": 0,
+      "spend": 60.78
+    },
+    {
+      "date": "2025-09-16",
+      "sales": 0,
+      "orders": 0,
+      "spend": 51.4
+    },
+    {
+      "date": "2025-09-17",
+      "sales": 0,
+      "orders": 0,
+      "spend": 51.08
+    },
+    {
+      "date": "2025-09-18",
+      "sales": 0,
+      "orders": 0,
+      "spend": 34.13
+    },
+    {
+      "date": "2025-09-19",
+      "sales": 0,
+      "orders": 0,
+      "spend": 53.79
+    },
+    {
+      "date": "2025-09-20",
+      "sales": 208.99,
+      "orders": 1,
+      "spend": 55.24
+    },
+    {
+      "date": "2025-09-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 54.8
+    },
+    {
+      "date": "2025-09-22",
+      "sales": 0,
+      "orders": 0,
+      "spend": 14.93
+    },
+    {
+      "date": "2025-09-23",
+      "sales": 0,
+      "orders": 0,
+      "spend": 14.05
+    },
+    {
+      "date": "2025-09-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 15.97
+    },
+    {
+      "date": "2025-09-25",
+      "sales": 0,
+      "orders": 0,
+      "spend": 14.25
+    },
+    {
+      "date": "2025-09-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 25.52
+    },
+    {
+      "date": "2025-09-27",
+      "sales": 236.28,
+      "orders": 2,
+      "spend": 41.07
+    },
+    {
+      "date": "2025-09-28",
+      "sales": 457.85,
+      "orders": 2,
+      "spend": 40.43
+    },
+    {
+      "date": "2025-09-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 27.92
+    },
+    {
+      "date": "2025-09-30",
+      "sales": 209.96,
+      "orders": 1,
+      "spend": 29.88
+    },
+    {
+      "date": "2025-10-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 27.89
+    },
+    {
+      "date": "2025-10-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 28.23
+    },
+    {
+      "date": "2025-10-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 28.76
+    },
+    {
+      "date": "2025-10-04",
+      "sales": 403.35,
+      "orders": 2,
+      "spend": 26.52
+    },
+    {
+      "date": "2025-10-05",
+      "sales": 431.89,
+      "orders": 4,
+      "spend": 35.21
+    },
+    {
+      "date": "2025-10-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 23.8
+    },
+    {
+      "date": "2025-10-07",
+      "sales": 131.28,
+      "orders": 1,
+      "spend": 19.66
+    },
+    {
+      "date": "2025-10-08",
+      "sales": 77.78,
+      "orders": 1,
+      "spend": 20.1
+    },
+    {
+      "date": "2025-10-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.83
+    },
+    {
+      "date": "2025-10-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.84
+    },
+    {
+      "date": "2025-10-11",
+      "sales": 0,
+      "orders": 0,
+      "spend": 15.74
+    },
+    {
+      "date": "2025-10-12",
+      "sales": 670.88,
+      "orders": 1,
+      "spend": 22.68
+    },
+    {
+      "date": "2025-10-13",
+      "sales": 502.98,
+      "orders": 2,
+      "spend": 20.21
+    },
+    {
+      "date": "2025-10-14",
+      "sales": 422.68,
+      "orders": 2,
+      "spend": 20.62
+    },
+    {
+      "date": "2025-10-15",
+      "sales": 0,
+      "orders": 0,
+      "spend": 19.84
+    },
+    {
+      "date": "2025-10-16",
+      "sales": 466.2,
+      "orders": 1,
+      "spend": 18.34
+    },
+    {
+      "date": "2025-10-17",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.08
+    },
+    {
+      "date": "2025-10-18",
+      "sales": 457.96,
+      "orders": 1,
+      "spend": 18.03
+    },
+    {
+      "date": "2025-10-19",
+      "sales": 377.99,
+      "orders": 1,
+      "spend": 23.99
+    },
+    {
+      "date": "2025-10-20",
+      "sales": 119.98,
+      "orders": 1,
+      "spend": 21.32
+    },
+    {
+      "date": "2025-10-21",
+      "sales": 362.69,
+      "orders": 1,
+      "spend": 19.51
+    },
+    {
+      "date": "2025-10-22",
+      "sales": 0,
+      "orders": 0,
+      "spend": 19.67
+    },
+    {
+      "date": "2025-10-23",
+      "sales": 383.03,
+      "orders": 1,
+      "spend": 19.07
+    },
+    {
+      "date": "2025-10-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.02
+    },
+    {
+      "date": "2025-10-25",
+      "sales": 245.57,
+      "orders": 1,
+      "spend": 19.02
+    },
+    {
+      "date": "2025-10-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 23.25
+    },
+    {
+      "date": "2025-10-27",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.7
+    },
+    {
+      "date": "2025-10-28",
+      "sales": 562.96,
+      "orders": 2,
+      "spend": 21.09
+    },
+    {
+      "date": "2025-10-29",
+      "sales": 152.3,
+      "orders": 1,
+      "spend": 19.93
+    },
+    {
+      "date": "2025-10-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.74
+    },
+    {
+      "date": "2025-10-31",
+      "sales": 0,
+      "orders": 0,
+      "spend": 18.51
+    },
+    {
+      "date": "2025-11-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 18.53
+    },
+    {
+      "date": "2025-11-02",
+      "sales": 407.98,
+      "orders": 1,
+      "spend": 24.98
+    },
+    {
+      "date": "2025-11-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 19.51
+    },
+    {
+      "date": "2025-11-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 21.09
+    },
+    {
+      "date": "2025-11-05",
+      "sales": 0,
+      "orders": 0,
+      "spend": 18.64
+    },
+    {
+      "date": "2025-11-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.43
+    },
+    {
+      "date": "2025-11-07",
+      "sales": 313.0,
+      "orders": 1,
+      "spend": 20.65
+    },
+    {
+      "date": "2025-11-08",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.42
+    },
+    {
+      "date": "2025-11-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 22.12
+    },
+    {
+      "date": "2025-11-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 21.44
+    },
+    {
+      "date": "2025-11-11",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.82
+    },
+    {
+      "date": "2025-11-12",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.88
+    },
+    {
+      "date": "2025-11-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 20.84
+    },
+    {
+      "date": "2025-11-14",
+      "sales": 0,
+      "orders": 0,
+      "spend": 17.39
+    },
+    {
+      "date": "2025-11-15",
+      "sales": 0,
+      "orders": 0,
+      "spend": 16.37
+    },
+    {
+      "date": "2025-11-16",
+      "sales": 0,
+      "orders": 0,
+      "spend": 22.41
+    },
+    {
+      "date": "2025-11-17",
+      "sales": 0,
+      "orders": 0,
+      "spend": 22.43
+    },
+    {
+      "date": "2025-11-18",
+      "sales": 1752.84,
+      "orders": 1,
+      "spend": 19.6
+    },
+    {
+      "date": "2025-11-19",
+      "sales": 366.99,
+      "orders": 1,
+      "spend": 18.18
+    },
+    {
+      "date": "2025-11-20",
+      "sales": 0,
+      "orders": 0,
+      "spend": 18.95
+    },
+    {
+      "date": "2025-11-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 19.79
+    },
+    {
+      "date": "2025-11-22",
+      "sales": 0,
+      "orders": 0,
+      "spend": 18.3
+    },
+    {
+      "date": "2025-11-23",
+      "sales": 0,
+      "orders": 0,
+      "spend": 24.87
+    },
+    {
+      "date": "2025-11-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 8.99
+    },
+    {
+      "date": "2025-11-25",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.99
+    },
+    {
+      "date": "2025-11-26",
+      "sales": 575.98,
+      "orders": 1,
+      "spend": 1.84
+    },
+    {
+      "date": "2025-11-27",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.01
+    },
+    {
+      "date": "2025-11-28",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.99
+    },
+    {
+      "date": "2025-11-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.84
+    },
+    {
+      "date": "2025-11-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.06
+    },
+    {
+      "date": "2025-12-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.0
+    },
+    {
+      "date": "2025-12-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.19
+    },
+    {
+      "date": "2025-12-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.92
+    },
+    {
+      "date": "2025-12-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.64
+    },
+    {
+      "date": "2025-12-05",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.15
+    },
+    {
+      "date": "2025-12-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.87
+    },
+    {
+      "date": "2025-12-07",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.66
+    },
+    {
+      "date": "2025-12-08",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.58
+    },
+    {
+      "date": "2025-12-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.92
+    },
+    {
+      "date": "2025-12-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.94
+    },
+    {
+      "date": "2025-12-11",
+      "sales": 327.96,
+      "orders": 1,
+      "spend": 1.96
+    },
+    {
+      "date": "2025-12-12",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.86
+    },
+    {
+      "date": "2025-12-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.08
+    },
+    {
+      "date": "2025-12-14",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.18
+    },
+    {
+      "date": "2025-12-15",
+      "sales": 0,
+      "orders": 0,
+      "spend": 2.07
+    },
+    {
+      "date": "2025-12-16",
+      "sales": 0,
+      "orders": 0,
+      "spend": 1.74
+    },
+    {
+      "date": "2025-12-17",
+      "sales": 228.99,
+      "orders": 1,
+      "spend": 2.64
+    },
+    {
+      "date": "2025-12-18",
+      "sales": 299.97,
+      "orders": 1,
+      "spend": 73.87
+    },
+    {
+      "date": "2025-12-19",
+      "sales": 419.92,
+      "orders": 3,
+      "spend": 74.64
+    },
+    {
+      "date": "2025-12-20",
+      "sales": 69.0,
+      "orders": 1,
+      "spend": 99.63
+    },
+    {
+      "date": "2025-12-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 116.72
+    },
+    {
+      "date": "2025-12-22",
+      "sales": 873.83,
+      "orders": 1,
+      "spend": 118.44
+    },
+    {
+      "date": "2025-12-23",
+      "sales": 757.95,
+      "orders": 4,
+      "spend": 112.71
+    },
+    {
+      "date": "2025-12-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 77.79
+    },
+    {
+      "date": "2025-12-25",
+      "sales": 1134.99,
+      "orders": 4,
+      "spend": 72.63
+    },
+    {
+      "date": "2025-12-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 79.41
+    },
+    {
+      "date": "2025-12-27",
+      "sales": 378.95,
+      "orders": 2,
+      "spend": 75.15
+    },
+    {
+      "date": "2025-12-28",
+      "sales": 0.0,
+      "orders": 0,
+      "spend": 90.41
+    },
+    {
+      "date": "2025-12-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 83.59
+    },
+    {
+      "date": "2025-12-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 80.94
+    },
+    {
+      "date": "2025-12-31",
+      "sales": 835.58,
+      "orders": 2,
+      "spend": 76.72
+    },
+    {
+      "date": "2026-01-01",
+      "sales": 0,
+      "orders": 0,
+      "spend": 76.1
+    },
+    {
+      "date": "2026-01-02",
+      "sales": 312.3,
+      "orders": 1,
+      "spend": 78.23
+    },
+    {
+      "date": "2026-01-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 72.98
+    },
+    {
+      "date": "2026-01-04",
+      "sales": 157.09,
+      "orders": 1,
+      "spend": 88.65
+    },
+    {
+      "date": "2026-01-05",
+      "sales": 529.93,
+      "orders": 2,
+      "spend": 95.17
+    },
+    {
+      "date": "2026-01-06",
+      "sales": 149.99,
+      "orders": 1,
+      "spend": 152.45
+    },
+    {
+      "date": "2026-01-07",
+      "sales": 0,
+      "orders": 0,
+      "spend": 154.11
+    },
+    {
+      "date": "2026-01-08",
+      "sales": 304.95,
+      "orders": 1,
+      "spend": 156.2
+    },
+    {
+      "date": "2026-01-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 147.02
+    },
+    {
+      "date": "2026-01-10",
+      "sales": 955.97,
+      "orders": 1,
+      "spend": 109.95
+    },
+    {
+      "date": "2026-01-11",
+      "sales": 733.43,
+      "orders": 3,
+      "spend": 193.45
+    },
+    {
+      "date": "2026-01-12",
+      "sales": 336.99,
+      "orders": 1,
+      "spend": 138.21
+    },
+    {
+      "date": "2026-01-13",
+      "sales": 521.98,
+      "orders": 1,
+      "spend": 121.68
+    },
+    {
+      "date": "2026-01-14",
+      "sales": 805.91,
+      "orders": 2,
+      "spend": 132.21
+    },
+    {
+      "date": "2026-01-15",
+      "sales": 711.49,
+      "orders": 3,
+      "spend": 134.26
+    },
+    {
+      "date": "2026-01-16",
+      "sales": 947.34,
+      "orders": 3,
+      "spend": 164.24
+    },
+    {
+      "date": "2026-01-17",
+      "sales": 1493.97,
+      "orders": 4,
+      "spend": 151.52
+    },
+    {
+      "date": "2026-01-18",
+      "sales": 575.94,
+      "orders": 3,
+      "spend": 193.17
+    },
+    {
+      "date": "2026-01-19",
+      "sales": 0,
+      "orders": 0,
+      "spend": 155.04
+    },
+    {
+      "date": "2026-01-20",
+      "sales": 0,
+      "orders": 0,
+      "spend": 49.99
+    },
+    {
+      "date": "2026-01-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 48.66
+    },
+    {
+      "date": "2026-01-22",
+      "sales": 228.92,
+      "orders": 1,
+      "spend": 44.92
+    },
+    {
+      "date": "2026-01-23",
+      "sales": -92.55,
+      "orders": 1,
+      "spend": 45.71
+    },
+    {
+      "date": "2026-01-24",
+      "sales": 0,
+      "orders": 0,
+      "spend": 127.06
+    },
+    {
+      "date": "2026-01-25",
+      "sales": 100.57,
+      "orders": 1,
+      "spend": 123.29
+    },
+    {
+      "date": "2026-01-26",
+      "sales": 526.37,
+      "orders": 1,
+      "spend": 122.6
+    },
+    {
+      "date": "2026-01-27",
+      "sales": 721.16,
+      "orders": 3,
+      "spend": 73.28
+    },
+    {
+      "date": "2026-01-28",
+      "sales": 485.99,
+      "orders": 1,
+      "spend": 68.46
+    },
+    {
+      "date": "2026-01-29",
+      "sales": 500.13,
+      "orders": 2,
+      "spend": 65.49
+    },
+    {
+      "date": "2026-01-30",
+      "sales": 906.65,
+      "orders": 3,
+      "spend": 64.61
+    },
+    {
+      "date": "2026-01-31",
+      "sales": 0,
+      "orders": 0,
+      "spend": 51.8
+    },
+    {
+      "date": "2026-02-01",
+      "sales": 1147.89,
+      "orders": 4,
+      "spend": 76.0
+    },
+    {
+      "date": "2026-02-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.62
+    },
+    {
+      "date": "2026-02-03",
+      "sales": 319.98,
+      "orders": 1,
+      "spend": 64.6
+    },
+    {
+      "date": "2026-02-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 64.74
+    },
+    {
+      "date": "2026-02-05",
+      "sales": 933.24,
+      "orders": 3,
+      "spend": 58.82
+    },
+    {
+      "date": "2026-02-06",
+      "sales": 117.13,
+      "orders": 1,
+      "spend": 60.26
+    },
+    {
+      "date": "2026-02-07",
+      "sales": 84.98,
+      "orders": 1,
+      "spend": 62.0
+    },
+    {
+      "date": "2026-02-08",
+      "sales": 458.03,
+      "orders": 3,
+      "spend": 70.33
+    },
+    {
+      "date": "2026-02-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 68.15
+    },
+    {
+      "date": "2026-02-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 71.22
+    },
+    {
+      "date": "2026-02-11",
+      "sales": 0,
+      "orders": 0,
+      "spend": 61.12
+    },
+    {
+      "date": "2026-02-12",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.2
+    },
+    {
+      "date": "2026-02-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 57.45
+    },
+    {
+      "date": "2026-02-14",
+      "sales": 0,
+      "orders": 0,
+      "spend": 58.23
+    },
+    {
+      "date": "2026-02-15",
+      "sales": 109.98,
+      "orders": 1,
+      "spend": 72.08
+    },
+    {
+      "date": "2026-02-16",
+      "sales": 0,
+      "orders": 0,
+      "spend": 68.89
+    },
+    {
+      "date": "2026-02-17",
+      "sales": 350.94,
+      "orders": 1,
+      "spend": 64.91
+    },
+    {
+      "date": "2026-02-18",
+      "sales": 612.13,
+      "orders": 2,
+      "spend": 59.85
+    },
+    {
+      "date": "2026-02-19",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.02
+    },
+    {
+      "date": "2026-02-20",
+      "sales": 1422.92,
+      "orders": 2,
+      "spend": 60.21
+    },
+    {
+      "date": "2026-02-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 61.62
+    },
+    {
+      "date": "2026-02-22",
+      "sales": 0,
+      "orders": 0,
+      "spend": 75.35
+    },
+    {
+      "date": "2026-02-23",
+      "sales": 548.96,
+      "orders": 2,
+      "spend": 70.84
+    },
+    {
+      "date": "2026-02-24",
+      "sales": 895.9,
+      "orders": 3,
+      "spend": 64.05
+    },
+    {
+      "date": "2026-02-25",
+      "sales": 537.95,
+      "orders": 2,
+      "spend": 64.78
+    },
+    {
+      "date": "2026-02-26",
+      "sales": 551.95,
+      "orders": 3,
+      "spend": 58.39
+    },
+    {
+      "date": "2026-02-27",
+      "sales": 433.92,
+      "orders": 2,
+      "spend": 59.6
+    },
+    {
+      "date": "2026-02-28",
+      "sales": 383.49,
+      "orders": 1,
+      "spend": 60.6
+    },
+    {
+      "date": "2026-03-01",
+      "sales": 737.99,
+      "orders": 1,
+      "spend": 73.2
+    },
+    {
+      "date": "2026-03-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.58
+    },
+    {
+      "date": "2026-03-03",
+      "sales": 564.97,
+      "orders": 2,
+      "spend": 67.55
+    },
+    {
+      "date": "2026-03-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 62.32
+    },
+    {
+      "date": "2026-03-05",
+      "sales": 114.97,
+      "orders": 1,
+      "spend": 59.06
+    },
+    {
+      "date": "2026-03-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 63.2
+    },
+    {
+      "date": "2026-03-07",
+      "sales": 0,
+      "orders": 0,
+      "spend": 60.67
+    },
+    {
+      "date": "2026-03-08",
+      "sales": 363.96,
+      "orders": 2,
+      "spend": 73.01
+    },
+    {
+      "date": "2026-03-09",
+      "sales": 592.36,
+      "orders": 2,
+      "spend": 70.58
+    },
+    {
+      "date": "2026-03-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 63.4
+    },
+    {
+      "date": "2026-03-11",
+      "sales": 0,
+      "orders": 0,
+      "spend": 63.24
+    },
+    {
+      "date": "2026-03-12",
+      "sales": 398.94,
+      "orders": 2,
+      "spend": 62.22
+    },
+    {
+      "date": "2026-03-13",
+      "sales": 676.86,
+      "orders": 2,
+      "spend": 63.01
+    },
+    {
+      "date": "2026-03-14",
+      "sales": 1105.94,
+      "orders": 3,
+      "spend": 57.89
+    },
+    {
+      "date": "2026-03-15",
+      "sales": 0,
+      "orders": 0,
+      "spend": 76.34
+    },
+    {
+      "date": "2026-03-16",
+      "sales": 654.94,
+      "orders": 2,
+      "spend": 71.76
+    },
+    {
+      "date": "2026-03-17",
+      "sales": 0,
+      "orders": 0,
+      "spend": 62.55
+    },
+    {
+      "date": "2026-03-18",
+      "sales": 1089.07,
+      "orders": 4,
+      "spend": 64.7
+    },
+    {
+      "date": "2026-03-19",
+      "sales": 393.96,
+      "orders": 1,
+      "spend": 58.21
+    },
+    {
+      "date": "2026-03-20",
+      "sales": 0,
+      "orders": 0,
+      "spend": 58.33
+    },
+    {
+      "date": "2026-03-21",
+      "sales": 403.29,
+      "orders": 2,
+      "spend": 62.68
+    },
+    {
+      "date": "2026-03-22",
+      "sales": 327.87,
+      "orders": 3,
+      "spend": 73.38
+    },
+    {
+      "date": "2026-03-23",
+      "sales": 0,
+      "orders": 0,
+      "spend": 72.83
+    },
+    {
+      "date": "2026-03-24",
+      "sales": 85.99,
+      "orders": 1,
+      "spend": 63.18
+    },
+    {
+      "date": "2026-03-25",
+      "sales": 376.98,
+      "orders": 1,
+      "spend": 63.16
+    },
+    {
+      "date": "2026-03-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 63.34
+    },
+    {
+      "date": "2026-03-27",
+      "sales": 0,
+      "orders": 0,
+      "spend": 58.78
+    },
+    {
+      "date": "2026-03-28",
+      "sales": 0,
+      "orders": 0,
+      "spend": 60.07
+    },
+    {
+      "date": "2026-03-29",
+      "sales": 198.99,
+      "orders": 1,
+      "spend": 71.93
+    },
+    {
+      "date": "2026-03-30",
+      "sales": 0,
+      "orders": 0,
+      "spend": 62.85
+    },
+    {
+      "date": "2026-03-31",
+      "sales": 0,
+      "orders": 0,
+      "spend": 70.12
+    },
+    {
+      "date": "2026-04-01",
+      "sales": 121.99,
+      "orders": 1,
+      "spend": 62.31
+    },
+    {
+      "date": "2026-04-02",
+      "sales": 323.97,
+      "orders": 2,
+      "spend": 59.08
+    },
+    {
+      "date": "2026-04-03",
+      "sales": 522.95,
+      "orders": 2,
+      "spend": 66.41
+    },
+    {
+      "date": "2026-04-04",
+      "sales": 204.97,
+      "orders": 1,
+      "spend": 61.86
+    },
+    {
+      "date": "2026-04-05",
+      "sales": 288.98,
+      "orders": 1,
+      "spend": 78.93
+    },
+    {
+      "date": "2026-04-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 71.73
+    },
+    {
+      "date": "2026-04-07",
+      "sales": -240.6,
+      "orders": 1,
+      "spend": 62.41
+    },
+    {
+      "date": "2026-04-08",
+      "sales": 74.89,
+      "orders": 1,
+      "spend": 58.56
+    },
+    {
+      "date": "2026-04-09",
+      "sales": 176.29,
+      "orders": 1,
+      "spend": 55.19
+    },
+    {
+      "date": "2026-04-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.51
+    },
+    {
+      "date": "2026-04-11",
+      "sales": 0,
+      "orders": 0,
+      "spend": 60.14
+    },
+    {
+      "date": "2026-04-12",
+      "sales": 267.97,
+      "orders": 1,
+      "spend": 74.54
+    },
+    {
+      "date": "2026-04-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 66.99
+    },
+    {
+      "date": "2026-04-14",
+      "sales": 456.0,
+      "orders": 1,
+      "spend": 64.14
+    },
+    {
+      "date": "2026-04-15",
+      "sales": 89.99,
+      "orders": 1,
+      "spend": 87.87
+    },
+    {
+      "date": "2026-04-16",
+      "sales": 517.96,
+      "orders": 2,
+      "spend": 72.32
+    },
+    {
+      "date": "2026-04-17",
+      "sales": 0,
+      "orders": 0,
+      "spend": 69.15
+    },
+    {
+      "date": "2026-04-18",
+      "sales": 309.96,
+      "orders": 1,
+      "spend": 58.43
+    },
+    {
+      "date": "2026-04-19",
+      "sales": 667.96,
+      "orders": 2,
+      "spend": 83.33
+    },
+    {
+      "date": "2026-04-20",
+      "sales": 154.96,
+      "orders": 1,
+      "spend": 72.36
+    },
+    {
+      "date": "2026-04-21",
+      "sales": 184.96,
+      "orders": 1,
+      "spend": 69.35
+    },
+    {
+      "date": "2026-04-22",
+      "sales": 0,
+      "orders": 0,
+      "spend": 75.61
+    },
+    {
+      "date": "2026-04-23",
+      "sales": 378.99,
+      "orders": 1,
+      "spend": 85.24
+    },
+    {
+      "date": "2026-04-24",
+      "sales": 178.98,
+      "orders": 1,
+      "spend": 73.95
+    },
+    {
+      "date": "2026-04-25",
+      "sales": 328.99,
+      "orders": 1,
+      "spend": 64.86
+    },
+    {
+      "date": "2026-04-26",
+      "sales": 1908.26,
+      "orders": 8,
+      "spend": 104.13
+    },
+    {
+      "date": "2026-04-27",
+      "sales": 352.01,
+      "orders": 1,
+      "spend": 80.11
+    },
+    {
+      "date": "2026-04-28",
+      "sales": 0.0,
+      "orders": 1,
+      "spend": 76.36
+    },
+    {
+      "date": "2026-04-29",
+      "sales": 228.99,
+      "orders": 1,
+      "spend": 65.0
+    },
+    {
+      "date": "2026-04-30",
+      "sales": 357.96,
+      "orders": 2,
+      "spend": 76.83
+    },
+    {
+      "date": "2026-05-01",
+      "sales": 139.98,
+      "orders": 1,
+      "spend": 78.0
+    },
+    {
+      "date": "2026-05-02",
+      "sales": 0,
+      "orders": 0,
+      "spend": 44.1
+    },
+    {
+      "date": "2026-05-03",
+      "sales": 0,
+      "orders": 0,
+      "spend": 97.56
+    },
+    {
+      "date": "2026-05-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 67.18
+    },
+    {
+      "date": "2026-05-05",
+      "sales": 358.98,
+      "orders": 1,
+      "spend": 91.72
+    },
+    {
+      "date": "2026-05-06",
+      "sales": 0,
+      "orders": 0,
+      "spend": 92.71
+    },
+    {
+      "date": "2026-05-07",
+      "sales": 198.99,
+      "orders": 1,
+      "spend": 68.68
+    },
+    {
+      "date": "2026-05-08",
+      "sales": 338.93,
+      "orders": 2,
+      "spend": 55.24
+    },
+    {
+      "date": "2026-05-09",
+      "sales": 443.96,
+      "orders": 2,
+      "spend": 51.13
+    },
+    {
+      "date": "2026-05-10",
+      "sales": 777.92,
+      "orders": 3,
+      "spend": 75.9
+    },
+    {
+      "date": "2026-05-11",
+      "sales": 169.99,
+      "orders": 1,
+      "spend": 62.49
+    },
+    {
+      "date": "2026-05-12",
+      "sales": 0,
+      "orders": 0,
+      "spend": 65.09
+    },
+    {
+      "date": "2026-05-13",
+      "sales": 0,
+      "orders": 0,
+      "spend": 58.47
+    },
+    {
+      "date": "2026-05-14",
+      "sales": 0,
+      "orders": 0,
+      "spend": 78.92
+    },
+    {
+      "date": "2026-05-15",
+      "sales": 169.97,
+      "orders": 1,
+      "spend": 85.58
+    },
+    {
+      "date": "2026-05-16",
+      "sales": 418.98,
+      "orders": 1,
+      "spend": 66.84
+    },
+    {
+      "date": "2026-05-17",
+      "sales": 537.62,
+      "orders": 3,
+      "spend": 95.45
+    },
+    {
+      "date": "2026-05-18",
+      "sales": 342.58,
+      "orders": 2,
+      "spend": 110.95
+    },
+    {
+      "date": "2026-05-19",
+      "sales": 317.98,
+      "orders": 1,
+      "spend": 105.44
+    },
+    {
+      "date": "2026-05-20",
+      "sales": -317.98,
+      "orders": 0,
+      "spend": 99.79
+    },
+    {
+      "date": "2026-05-21",
+      "sales": 0,
+      "orders": 0,
+      "spend": 88.85
+    },
+    {
+      "date": "2026-05-22",
+      "sales": 208.99,
+      "orders": 1,
+      "spend": 88.9
+    },
+    {
+      "date": "2026-05-23",
+      "sales": 0,
+      "orders": 0,
+      "spend": 72.5
+    },
+    {
+      "date": "2026-05-24",
+      "sales": 378.95,
+      "orders": 2,
+      "spend": 118.21
+    },
+    {
+      "date": "2026-05-25",
+      "sales": 0,
+      "orders": 0,
+      "spend": 102.32
+    },
+    {
+      "date": "2026-05-26",
+      "sales": 0,
+      "orders": 0,
+      "spend": 98.56
+    },
+    {
+      "date": "2026-05-27",
+      "sales": 0,
+      "orders": 0,
+      "spend": 85.21
+    },
+    {
+      "date": "2026-05-28",
+      "sales": 1377.97,
+      "orders": 3,
+      "spend": 95.01
+    },
+    {
+      "date": "2026-05-29",
+      "sales": 0,
+      "orders": 0,
+      "spend": 123.57
+    },
+    {
+      "date": "2026-05-30",
+      "sales": 174.65,
+      "orders": 1,
+      "spend": 121.76
+    },
+    {
+      "date": "2026-05-31",
+      "sales": 1554.91,
+      "orders": 3,
+      "spend": 177.22
+    },
+    {
+      "date": "2026-06-01",
+      "sales": 310.09,
+      "orders": 1,
+      "spend": 158.71
+    },
+    {
+      "date": "2026-06-02",
+      "sales": 1560.93,
+      "orders": 2,
+      "spend": 132.53
+    },
+    {
+      "date": "2026-06-03",
+      "sales": 914.34,
+      "orders": 3,
+      "spend": 147.0
+    },
+    {
+      "date": "2026-06-04",
+      "sales": 0,
+      "orders": 0,
+      "spend": 145.18
+    },
+    {
+      "date": "2026-06-05",
+      "sales": 1013.69,
+      "orders": 4,
+      "spend": 187.87
+    },
+    {
+      "date": "2026-06-06",
+      "sales": 636.94,
+      "orders": 2,
+      "spend": 139.9
+    },
+    {
+      "date": "2026-06-07",
+      "sales": 0,
+      "orders": 0,
+      "spend": 220.89
+    },
+    {
+      "date": "2026-06-08",
+      "sales": 129.99,
+      "orders": 1,
+      "spend": 170.12
+    }
+  ],
+  "metaCampaigns": [
+    {
+      "name": "ONLINE CORALS - SALES - PURCHASES - DABA",
+      "spend": 9604.84
+    },
+    {
+      "name": "ONLINE CORALS - TRAFFIC - LP VIEWS - STATIC ADS",
+      "spend": 4043.5
+    },
+    {
+      "name": "Online Corals - Sales - DABA Prospecting - FB15",
+      "spend": 2395.94
+    },
+    {
+      "name": "ONLINE CORALS - SALES - PURCHASES - PURCHASES",
+      "spend": 738.53
+    },
+    {
+      "name": "Online Corals - Traffic - Max Reach - August 2025",
+      "spend": 210.4
+    },
+    {
+      "name": "New Leads Campaign",
+      "spend": 95.92
+    }
+  ]
 }

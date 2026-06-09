@@ -12,17 +12,20 @@
 * { box-sizing: border-box; }
 body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f3f7f9; color: #0f2b36; }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 18px 70px; }
-header.top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 h1 { font-size: 20px; margin: 0; color: #07414f; }
 .sub { color: #5a7682; font-size: 13px; margin: 2px 0 0; }
-.controls { display: flex; align-items: center; gap: 8px; }
+.section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #0a5566; margin: 26px 0 10px; border-bottom: 1px solid #dce8ec; padding-bottom: 6px; }
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 .controls label { font-size: 12.5px; color: #5a7682; }
-select { padding: 7px 10px; border: 1px solid #c5d6dd; border-radius: 8px; background: #fff; font-size: 13px; color: #0f2b36; }
-.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 18px 0; }
+input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-radius: 8px; background: #fff; font-size: 13px; color: #0f2b36; }
+.preset { padding: 6px 11px; border: 1px solid #c5d6dd; border-radius: 999px; background: #fff; font-size: 12.5px; color: #0a5566; cursor: pointer; }
+.preset.active { background: #0a91a8; color: #fff; border-color: #0a91a8; }
+.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 8px 0 16px; }
 .kpi { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 14px; }
 .kpi .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6a8593; }
 .kpi .value { font-size: 22px; font-weight: 700; margin-top: 4px; color: #07414f; }
 .kpi .meta { font-size: 11.5px; color: #6a8593; margin-top: 2px; }
+.kpi.ad .value { color: #c2410c; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .card { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
 .card h2 { font-size: 14.5px; margin: 0 0 2px; color: #07414f; }
@@ -40,50 +43,61 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
-    <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
-    <div class="controls">
-      <label for="range">Window</label>
-      <select id="range">
-        <option value="3">Last 3 months</option>
-        <option value="6">Last 6 months</option>
-        <option value="12">Last 12 months</option>
-      </select>
-    </div>
-  </header>
+  <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
+  <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
 
   <div class="note" id="srcnote" style="display:none"></div>
 
+  <!-- ===== SECTION 1: Sales & Meta Ads — date range (day precision) ===== -->
+  <div class="section-title">Sales &amp; Meta Ads — choose any date range</div>
+  <div class="controls">
+    <label>From</label><input type="date" id="from">
+    <label>To</label><input type="date" id="to">
+    <span style="width:8px"></span>
+    <button class="preset" data-d="30">30d</button>
+    <button class="preset" data-d="90">90d</button>
+    <button class="preset" data-d="180">6mo</button>
+    <button class="preset" data-d="365">12mo</button>
+    <button class="preset" data-d="all">All</button>
+  </div>
+
   <div class="kpis">
-    <div class="kpi"><div class="label">Total sales</div><div class="value" id="k-sales">—</div><div class="meta" id="k-sales-m">&nbsp;</div></div>
-    <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta" id="k-orders-m">&nbsp;</div></div>
-    <div class="kpi"><div class="label">Avg order value</div><div class="value" id="k-aov">—</div><div class="meta">&nbsp;</div></div>
-    <div class="kpi"><div class="label">Conversion rate</div><div class="value" id="k-cvr">—</div><div class="meta">sessions to checkout</div></div>
-    <div class="kpi"><div class="label">Top channel</div><div class="value" id="k-chan">—</div><div class="meta" id="k-chan-m">&nbsp;</div></div>
+    <div class="kpi"><div class="label">Total sales</div><div class="value" id="k-sales">—</div><div class="meta" id="k-range">&nbsp;</div></div>
+    <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta" id="k-aov">&nbsp;</div></div>
+    <div class="kpi ad"><div class="label">Meta ad spend</div><div class="value" id="k-spend">—</div><div class="meta">Aquarium Show Sunrise</div></div>
+    <div class="kpi"><div class="label">Blended ROAS</div><div class="value" id="k-roas">—</div><div class="meta">sales ÷ Meta spend</div></div>
+    <div class="kpi"><div class="label">Days in range</div><div class="value" id="k-days">—</div><div class="meta" id="k-perday">&nbsp;</div></div>
   </div>
 
   <div class="grid2">
-    <div class="card"><h2>Revenue &amp; orders trend</h2><p class="hint">Total sales (bars) and orders (line), by month.</p><canvas id="trendChart" height="150"></canvas></div>
-    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas></div>
+    <div class="card"><h2>Revenue vs. Meta spend</h2><p class="hint">Monthly store sales (bars) and Meta ad spend (line) over the selected range.</p><canvas id="rsChart" height="150"></canvas></div>
+    <div class="card"><h2>Meta spend by campaign</h2><p class="hint">Trailing 12 months (whole-account = this initiative).</p>
+      <table id="campTable"><thead><tr><th>Campaign</th><th class="num">Spend</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 2: Product & channel breakdown (3/6/12-month windows) ===== -->
+  <div class="section-title">Product &amp; channel breakdown</div>
+  <div class="controls">
+    <label for="range">Window</label>
+    <select id="range">
+      <option value="3">Last 3 months</option>
+      <option value="6">Last 6 months</option>
+      <option value="12">Last 12 months</option>
+    </select>
+    <span class="hint" style="font-size:12px;color:#6a8593;">Monthly resolution. Sales/spend above are exact-day.</span>
   </div>
 
   <div class="grid2">
     <div class="card"><h2>Coral species &amp; type</h2><p class="hint">Gross sales by type, parsed from product titles.</p><canvas id="specChart" height="150"></canvas></div>
     <div class="card"><h2>Marketing channels</h2><p class="hint">Attributed sales by referrer (Meta / Google / IG).</p><canvas id="chanChart" height="150"></canvas></div>
   </div>
-
-  <div class="card">
-    <h2>Top products</h2><p class="hint">Best sellers by gross sales.</p>
+  <div class="card"><h2>Top products</h2><p class="hint">Best sellers by gross sales.</p>
     <table id="prodTable"><thead><tr><th>Product</th><th>Species/Type</th><th class="num">Gross</th><th class="num">Net</th><th class="num">Orders</th></tr></thead><tbody></tbody></table>
   </div>
-
   <div class="grid2">
-    <div class="card"><h2>Species sold-together</h2><p class="hint">Coral types co-occurring in the same order.</p>
-      <div id="pairEmpty" class="empty" style="display:none"></div>
-      <table id="pairTable"><thead><tr><th>Type A</th><th>Type B</th><th class="num">Orders together</th></tr></thead><tbody></tbody></table>
-    </div>
-    <div class="card"><h2>Species by type — ranked</h2><p class="hint">Gross sales, orders, and product count by coral type.</p>
+    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas></div>
+    <div class="card"><h2>Species by type — ranked</h2><p class="hint">Gross sales, orders, product count by type.</p>
       <table id="specTable"><thead><tr><th>Species/Type</th><th class="num">Gross</th><th class="num">Orders</th><th class="num">Products</th></tr></thead><tbody></tbody></table>
     </div>
   </div>
@@ -92,70 +106,88 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 </div>
 
 <script>
-const C = { teal:"#0a91a8", deep:"#07414f", coral:"#ff7a59", green:"#2a9d8f" };
+const C = { teal:"#0a91a8", deep:"#07414f", coral:"#ff7a59", green:"#2a9d8f", ad:"#c2410c" };
 const money = v => "$" + (Number(v)||0).toLocaleString(undefined,{maximumFractionDigits:0});
 const money2 = v => "$" + (Number(v)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const intf = v => (Number(v)||0).toLocaleString();
 const mlabel = s => { const [y,m]=s.split("-"); return new Date(+y,+m-1,1).toLocaleDateString(undefined,{month:"short",year:"2-digit"}); };
-const wlabel = k => ({"3":"last 3 months","6":"last 6 months","12":"last 12 months"})[k]||"";
-let chart = {};
-let DATA = null;
+let chart = {}; let DATA=null;
 function mk(id,cfg){ if(chart[id]) chart[id].destroy(); chart[id]=new Chart(document.getElementById(id),cfg); }
 
-function render(key){
-  const d = DATA.windows[key]; if(!d) return;
-  const wl = wlabel(key);
-  document.getElementById("k-sales").textContent = money(d.kpis.totalSales);
-  document.getElementById("k-sales-m").textContent = wl;
-  document.getElementById("k-orders").textContent = intf(d.kpis.orders);
-  document.getElementById("k-orders-m").textContent = wl;
-  document.getElementById("k-aov").textContent = money2(d.kpis.aov);
-  document.getElementById("k-cvr").textContent = (Number(d.kpis.conversionRate)||0).toFixed(2)+"%";
-  if(d.kpis.topChannel){ document.getElementById("k-chan").textContent = d.kpis.topChannel.label; document.getElementById("k-chan-m").textContent = money(d.kpis.topChannel.sales)+" · "+intf(d.kpis.topChannel.orders)+" orders"; }
+/* ---------- Section 1: date range ---------- */
+function renderRange(){
+  const from=document.getElementById("from").value, to=document.getElementById("to").value;
+  const rows=DATA.daily.filter(d=> d.date>=from && d.date<=to);
+  let sales=0,orders=0,spend=0;
+  const months={};
+  rows.forEach(d=>{ sales+=d.sales; orders+=d.orders; spend+=d.spend;
+    const m=d.date.slice(0,7); (months[m]=months[m]||{s:0,sp:0}); months[m].s+=d.sales; months[m].sp+=d.spend; });
+  document.getElementById("k-sales").textContent=money(sales);
+  document.getElementById("k-range").textContent=from+" → "+to;
+  document.getElementById("k-orders").textContent=intf(orders);
+  document.getElementById("k-aov").textContent=orders?("AOV "+money2(sales/orders)):" ";
+  document.getElementById("k-spend").textContent=money(spend);
+  document.getElementById("k-roas").textContent= spend? (sales/spend).toFixed(2)+"×" : "—";
+  const days=Math.max(1,Math.round((new Date(to)-new Date(from))/86400000)+1);
+  document.getElementById("k-days").textContent=intf(days);
+  document.getElementById("k-perday").textContent="≈ "+money(sales/days)+"/day · "+money(spend/days)+" ad/day";
+  const labels=Object.keys(months).sort();
+  mk("rsChart",{ data:{ labels:labels.map(mlabel), datasets:[
+    {type:"bar",label:"Store sales",data:labels.map(m=>+months[m].s.toFixed(2)),backgroundColor:C.teal,yAxisID:"y",order:2},
+    {type:"line",label:"Meta spend",data:labels.map(m=>+months[m].sp.toFixed(2)),borderColor:C.ad,backgroundColor:C.ad,yAxisID:"y",tension:.3,order:1}
+  ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
+}
+function setPreset(d){
+  const max=DATA.daily[DATA.daily.length-1].date, min=DATA.daily[0].date;
+  document.getElementById("to").value=max;
+  if(d==="all"){ document.getElementById("from").value=min; }
+  else { const f=new Date(max); f.setDate(f.getDate()-(+d-1)); const iso=f.toISOString().slice(0,10); document.getElementById("from").value= iso<min?min:iso; }
+  document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active", b.dataset.d===String(d)));
+  renderRange();
+}
 
-  mk("trendChart",{ data:{ labels:d.trend.map(r=>mlabel(r.month)), datasets:[
-    {type:"bar",label:"Total sales",data:d.trend.map(r=>r.totalSales),backgroundColor:C.teal,yAxisID:"y",order:2},
-    {type:"line",label:"Orders",data:d.trend.map(r=>r.orders),borderColor:C.coral,backgroundColor:C.coral,yAxisID:"y1",tension:.3,order:1}
-  ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:"left",ticks:{callback:v=>"$"+(v/1000)+"k"}},y1:{position:"right",grid:{drawOnChartArea:false}}}}});
-
+/* ---------- Section 2: window breakdowns ---------- */
+function renderWindow(key){
+  const d=DATA.windows[key]; if(!d) return;
+  const sp=(d.species||[]).slice(0,10);
+  mk("specChart",{ type:"bar", data:{ labels:sp.map(r=>r.label), datasets:[{label:"Gross sales",data:sp.map(r=>r.gross),backgroundColor:C.coral}]},
+    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
+  const ch=(d.channels||[]).slice().sort((a,b)=>b.sales-a.sales).slice(0,8);
+  mk("chanChart",{ type:"bar", data:{ labels:ch.map(r=>r.label), datasets:[{label:"Attributed sales",data:ch.map(r=>r.sales),backgroundColor:C.teal}]},
+    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
   mk("sessChart",{ data:{ labels:d.traffic.map(r=>mlabel(r.month)), datasets:[
     {type:"bar",label:"Sessions",data:d.traffic.map(r=>r.sessions),backgroundColor:C.green,yAxisID:"y",order:2},
     {type:"line",label:"Conversion %",data:d.traffic.map(r=>r.cvr),borderColor:C.deep,backgroundColor:C.deep,yAxisID:"y1",tension:.3,order:1}
   ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:"left"},y1:{position:"right",grid:{drawOnChartArea:false},ticks:{callback:v=>(+v).toFixed(2)+"%"}}}}});
-
-  const sp = (d.species||[]).slice(0,10);
-  mk("specChart",{ type:"bar", data:{ labels:sp.map(r=>r.label), datasets:[{label:"Gross sales",data:sp.map(r=>r.gross),backgroundColor:C.coral}]},
-    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
-
-  const ch = (d.channels||[]).slice().sort((a,b)=>b.sales-a.sales).slice(0,8);
-  mk("chanChart",{ type:"bar", data:{ labels:ch.map(r=>r.label), datasets:[{label:"Attributed sales",data:ch.map(r=>r.sales),backgroundColor:C.teal}]},
-    options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
-
-  document.querySelector("#prodTable tbody").innerHTML = (d.topProducts||[]).map(r=>
+  document.querySelector("#prodTable tbody").innerHTML=(d.topProducts||[]).map(r=>
     "<tr><td>"+r.title+"</td><td><span class='pill'>"+r.species+"</span></td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+money2(r.net)+"</td><td class='num'>"+intf(r.orders)+"</td></tr>").join("");
-
-  document.querySelector("#specTable tbody").innerHTML = (d.species||[]).map(r=>
+  document.querySelector("#specTable tbody").innerHTML=(d.species||[]).map(r=>
     "<tr><td>"+r.label+"</td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+intf(r.orders)+"</td><td class='num'>"+intf(r.products)+"</td></tr>").join("");
-
-  if(!d.pairs || d.pairs.length===0){ document.getElementById("pairTable").style.display="none"; const e=document.getElementById("pairEmpty"); e.style.display="block"; e.textContent="Populates when the next version is built (needs full order line items)."; }
-  else { document.getElementById("pairTable").style.display="table"; document.getElementById("pairEmpty").style.display="none"; document.querySelector("#pairTable tbody").innerHTML = d.pairs.map(p=>"<tr><td>"+p.a+"</td><td>"+p.b+"</td><td class='num'>"+p.n+"</td></tr>").join(""); }
 }
 
-async function loadData(){
-  try { DATA = await (await fetch("./data.json?ts="+Date.now())).json(); }
-  catch(e){ document.getElementById("foot").textContent = "Could not load data.json: "+e.message; return; }
-  document.getElementById("gen").textContent = "updated " + new Date(DATA.meta.generatedAt).toLocaleDateString();
-  if(DATA.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent = DATA.meta.source; }
-  document.getElementById("foot").textContent = "Aquarium Show · data as of "+new Date(DATA.meta.generatedAt).toLocaleDateString();
-
-  let key = DATA.defaultWindow || "12";
-  try { const saved = localStorage.getItem("as_range"); if(saved && DATA.windows[saved]) key = saved; } catch(e){}
-  const sel = document.getElementById("range");
-  sel.value = key;
-  sel.addEventListener("change", e=>{ try{ localStorage.setItem("as_range", e.target.value); }catch(_){ } render(e.target.value); });
-  render(key);
+async function load(){
+  try{ DATA=await (await fetch("./data.json?ts="+Date.now())).json(); }
+  catch(e){ document.getElementById("foot").textContent="Could not load data.json: "+e.message; return; }
+  document.getElementById("gen").textContent="updated "+new Date(DATA.meta.generatedAt).toLocaleDateString();
+  if(DATA.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent=DATA.meta.source; }
+  document.getElementById("foot").textContent="Aquarium Show · data as of "+new Date(DATA.meta.generatedAt).toLocaleDateString();
+  // campaigns
+  document.querySelector("#campTable tbody").innerHTML=(DATA.metaCampaigns||[]).map(c=>
+    "<tr><td>"+c.name+"</td><td class='num'>"+money2(c.spend)+"</td></tr>").join("")
+    +"<tr><td><b>Total</b></td><td class='num'><b>"+money2((DATA.metaCampaigns||[]).reduce((a,c)=>a+c.spend,0))+"</b></td></tr>";
+  // date inputs
+  const min=DATA.daily[0].date, max=DATA.daily[DATA.daily.length-1].date;
+  ["from","to"].forEach(id=>{ const el=document.getElementById(id); el.min=min; el.max=max; el.addEventListener("change",()=>{ document.querySelectorAll(".preset").forEach(b=>b.classList.remove("active")); renderRange(); }); });
+  document.querySelectorAll(".preset").forEach(b=> b.addEventListener("click",()=> setPreset(b.dataset.d)) );
+  setPreset("90");
+  // window selector
+  const sel=document.getElementById("range");
+  let wkey=DATA.defaultWindow||"12"; try{ const s=localStorage.getItem("as_range"); if(s&&DATA.windows[s]) wkey=s; }catch(e){}
+  sel.value=wkey;
+  sel.addEventListener("change",e=>{ try{localStorage.setItem("as_range",e.target.value);}catch(_){ } renderWindow(e.target.value); });
+  renderWindow(wkey);
 }
-loadData();
+load();
 </script>
 </body>
 </html>
