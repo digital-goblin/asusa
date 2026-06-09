@@ -18,7 +18,7 @@ h1 { font-size: 20px; margin: 0; color: #07414f; }
 .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
 .controls label { font-size: 12.5px; color: #5a7682; }
 input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-radius: 8px; background: #fff; font-size: 13px; color: #0f2b36; }
-.preset { padding: 6px 11px; border: 1px solid #c5d6dd; border-radius: 999px; background: #fff; font-size: 12.5px; color: #0a5566; cursor: pointer; }
+.preset, .pg { padding: 6px 11px; border: 1px solid #c5d6dd; border-radius: 999px; background: #fff; font-size: 12.5px; color: #0a5566; cursor: pointer; }
 .preset.active { background: #0a91a8; color: #fff; border-color: #0a91a8; }
 .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 8px 0 16px; }
 .kpi { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 14px; }
@@ -29,12 +29,17 @@ input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-r
 .delta { font-size: 12px; font-weight: 700; }
 .delta.up { color: #16a34a; } .delta.down { color: #dc2626; } .delta.flat { color: #94a3b8; }
 .delta .lbl { color: #94a3b8; font-weight: 500; }
-.mom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 6px 0 4px; }
-.mom .c { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 14px; }
-.mom .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: #6a8593; }
-.mom .v { font-size: 24px; font-weight: 700; color: #07414f; margin-top: 4px; }
-.mom .d { margin-top: 4px; font-size: 13px; }
-.mom .prev { color: #94a3b8; font-size: 11.5px; }
+.mom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 6px 0 6px; }
+.mom .c { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 13px; }
+.mom .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .03em; color: #6a8593; }
+.mom .v { font-size: 22px; font-weight: 700; color: #07414f; margin-top: 4px; }
+.mom .d { margin-top: 3px; font-size: 13px; }
+.mom .prev { color: #94a3b8; font-size: 11px; }
+.boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.box { background: #f6fafb; border: 1px solid #d7e6ea; border-radius: 10px; padding: 10px 12px; }
+.box .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .03em; color: #6a8593; }
+.box .v { font-size: 16px; font-weight: 700; color: #07414f; margin-top: 2px; }
+.box .s { font-size: 11.5px; color: #6a8593; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .card { background: #fff; border: 1px solid #e2ecf0; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
 .card h2 { font-size: 14.5px; margin: 0 0 2px; color: #07414f; }
@@ -44,9 +49,10 @@ th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #eef3f5; }
 th { color: #5a7682; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #e3f2f6; color: #0a5566; font-size: 11.5px; font-weight: 600; }
+.pager { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 12.5px; color: #5a7682; }
 .note { background: #fff7e6; border: 1px solid #f0d9a8; color: #7a5b13; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; margin: 12px 0; }
 .foot { color: #8aa1ab; font-size: 11.5px; margin-top: 18px; text-align: center; }
-@media (max-width: 880px){ .kpis,.mom{ grid-template-columns: repeat(2,1fr);} .grid2{ grid-template-columns: 1fr; } }
+@media (max-width: 880px){ .kpis,.mom{ grid-template-columns: repeat(2,1fr);} .grid2,.boxes{ grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -64,6 +70,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     <div class="c"><div class="lbl">Meta ad spend</div><div class="v" id="m-spend-v">—</div><div class="d" id="m-spend-d"></div><div class="prev" id="m-spend-p"></div></div>
     <div class="c"><div class="lbl">ROAS</div><div class="v" id="m-roas-v">—</div><div class="d" id="m-roas-d"></div><div class="prev" id="m-roas-p"></div></div>
   </div>
+  <div class="mom" id="momTraffic"></div>
 
   <!-- ===== Sales & Meta Ads — date range ===== -->
   <div class="section-title">Sales &amp; Meta Ads — choose any date range</div>
@@ -78,7 +85,6 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     <button class="preset" data-d="all">All</button>
     <span style="font-size:12px;color:#6a8593;">deltas vs the prior equal-length period</span>
   </div>
-
   <div class="kpis">
     <div class="kpi"><div class="label">Total sales</div><div class="value" id="k-sales">—</div><div class="meta"><span id="k-sales-d"></span> <span id="k-range"></span></div></div>
     <div class="kpi"><div class="label">Orders</div><div class="value" id="k-orders">—</div><div class="meta"><span id="k-orders-d"></span> <span id="k-aov"></span></div></div>
@@ -86,7 +92,6 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     <div class="kpi"><div class="label">Blended ROAS</div><div class="value" id="k-roas">—</div><div class="meta"><span id="k-roas-d"></span> <span class="lbl">sales ÷ spend</span></div></div>
     <div class="kpi"><div class="label">Days in range</div><div class="value" id="k-days">—</div><div class="meta" id="k-perday">&nbsp;</div></div>
   </div>
-
   <div class="grid2">
     <div class="card"><h2>Revenue vs. Meta spend</h2><p class="hint">Monthly store sales (bars) and Meta ad spend (line) over the selected range.</p><canvas id="rsChart" height="150"></canvas></div>
     <div class="card"><h2>Meta spend by campaign</h2><p class="hint">Trailing 12 months (whole-account = this initiative).</p>
@@ -98,23 +103,27 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   <div class="section-title">Product &amp; channel breakdown</div>
   <div class="controls">
     <label for="range">Window</label>
-    <select id="range">
-      <option value="3">Last 3 months</option>
-      <option value="6">Last 6 months</option>
-      <option value="12">Last 12 months</option>
-    </select>
+    <select id="range"><option value="3">Last 3 months</option><option value="6">Last 6 months</option><option value="12">Last 12 months</option></select>
     <span class="hint" style="font-size:12px;color:#6a8593;">Monthly resolution. Sales/spend above are exact-day.</span>
   </div>
-
   <div class="grid2">
-    <div class="card"><h2>Coral species &amp; type</h2><p class="hint">Gross sales by type, parsed from product titles.</p><canvas id="specChart" height="150"></canvas></div>
+    <div class="card"><h2>Coral species &amp; type</h2><p class="hint">Gross sales by type, parsed from product titles.</p>
+      <div class="boxes">
+        <div class="box"><div class="lbl">Hero category</div><div class="v" id="b-hero">—</div><div class="s" id="b-hero-s"></div></div>
+        <div class="box"><div class="lbl">Highest-AOV coral</div><div class="v" id="b-aov">—</div><div class="s" id="b-aov-s"></div></div>
+      </div>
+      <canvas id="specChart" height="150"></canvas>
+    </div>
     <div class="card"><h2>Marketing channels</h2><p class="hint">Attributed sales by referrer (Meta / Google / IG).</p><canvas id="chanChart" height="150"></canvas></div>
   </div>
   <div class="card"><h2>Top products</h2><p class="hint">Best sellers by gross sales.</p>
-    <table id="prodTable"><thead><tr><th>Product</th><th>Species/Type</th><th class="num">Gross</th><th class="num">Net</th><th class="num">Orders</th></tr></thead><tbody></tbody></table>
+    <table id="prodTable"><thead><tr><th>#</th><th>Product</th><th>Species/Type</th><th class="num">Gross</th><th class="num">Net</th><th class="num">Orders</th></tr></thead><tbody></tbody></table>
+    <div class="pager"><button class="pg" id="pgPrev">‹ Prev</button><span id="pgInfo"></span><button class="pg" id="pgNext">Next ›</button></div>
   </div>
   <div class="grid2">
-    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas></div>
+    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas>
+      <table id="trafTable" style="margin-top:12px"><thead><tr><th>Month</th><th class="num">Sessions</th><th class="num">Checkouts</th><th class="num">CVR %</th></tr></thead><tbody></tbody></table>
+    </div>
     <div class="card"><h2>Species by type — ranked</h2><p class="hint">Gross sales, orders, product count by type.</p>
       <table id="specTable"><thead><tr><th>Species/Type</th><th class="num">Gross</th><th class="num">Orders</th><th class="num">Products</th></tr></thead><tbody></tbody></table>
     </div>
@@ -129,40 +138,45 @@ const money = v => "$" + (Number(v)||0).toLocaleString(undefined,{maximumFractio
 const money2 = v => "$" + (Number(v)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const intf = v => (Number(v)||0).toLocaleString();
 const mlabel = s => { const [y,m]=s.split("-"); return new Date(+y,+m-1,1).toLocaleDateString(undefined,{month:"short",year:"2-digit"}); };
-let chart = {}; let DATA=null;
+const dur = sec => { const m=Math.floor(sec/60), s=Math.round(sec%60); return m+":"+String(s).padStart(2,"0"); };
+function fmtVal(v,fmt){ if(fmt==="int")return intf(v); if(fmt==="pct1")return (+v).toFixed(1)+"%"; if(fmt==="pct2")return (+v).toFixed(2)+"%"; if(fmt==="num2")return (+v).toFixed(2); if(fmt==="dur")return dur(v); return v; }
+let chart={}; let DATA=null; let prodAll=[]; let prodPage=0;
 function mk(id,cfg){ if(chart[id]) chart[id].destroy(); chart[id]=new Chart(document.getElementById(id),cfg); }
 
 function addDays(iso,n){ const dt=new Date(iso+"T00:00:00"); dt.setDate(dt.getDate()+n); return dt.toISOString().slice(0,10); }
-function agg(from,to){ let s=0,o=0,sp=0; for(const d of DATA.daily){ if(d.date>=from && d.date<=to){ s+=d.sales; o+=d.orders; sp+=d.spend; } } return {sales:s,orders:o,spend:sp,roas: sp? s/sp : 0}; }
-function badge(cur,prev){
-  if(prev===0 || prev===undefined){ return cur>0 ? "<span class='delta up'>▲ new</span>" : "<span class='delta flat'>—</span>"; }
+function agg(from,to){ let s=0,o=0,sp=0; for(const d of DATA.daily){ if(d.date>=from&&d.date<=to){ s+=d.sales;o+=d.orders;sp+=d.spend; } } return {sales:s,orders:o,spend:sp,roas:sp?s/sp:0}; }
+/* directional badge: arrow=direction, green if "good" */
+function badge(cur,prev){ return badge2(cur,prev,true); }
+function badge2(cur,prev,goodUp){
+  if(prev===0||prev===undefined){ return cur>0?"<span class='delta up'>▲ new</span>":"<span class='delta flat'>—</span>"; }
   const ch=(cur-prev)/Math.abs(prev)*100;
   if(Math.abs(ch)<0.5) return "<span class='delta flat'>± 0%</span>";
-  const up=ch>0;
-  return "<span class='delta "+(up?"up":"down")+"'>"+(up?"▲":"▼")+" "+Math.abs(ch).toFixed(0)+"%</span>";
+  const up=ch>0, good=(up===goodUp);
+  return "<span class='delta "+(good?"up":"down")+"'>"+(up?"▲":"▼")+" "+Math.abs(ch).toFixed(0)+"%</span>";
 }
 
-/* ---------- 7-day momentum ---------- */
 function renderMomentum(){
   const max=DATA.daily[DATA.daily.length-1].date;
-  const cF=addDays(max,-6), cT=max, pT=addDays(cF,-1), pF=addDays(pT,-6);
-  const c=agg(cF,cT), p=agg(pF,pT);
-  const set=(id,val,cur,prev,prevTxt)=>{ document.getElementById(id+"-v").textContent=val; document.getElementById(id+"-d").innerHTML=badge(cur,prev); document.getElementById(id+"-p").textContent="prev "+prevTxt; };
+  const cF=addDays(max,-6),cT=max,pT=addDays(cF,-1),pF=addDays(pT,-6);
+  const c=agg(cF,cT),p=agg(pF,pT);
+  const set=(id,val,cur,prev,pt)=>{document.getElementById(id+"-v").textContent=val;document.getElementById(id+"-d").innerHTML=badge(cur,prev);document.getElementById(id+"-p").textContent="prev "+pt;};
   set("m-sales",money(c.sales),c.sales,p.sales,money(p.sales));
   set("m-orders",intf(c.orders),c.orders,p.orders,intf(p.orders));
   set("m-spend",money2(c.spend),c.spend,p.spend,money2(p.spend));
   set("m-roas",(c.roas?c.roas.toFixed(2):"0.00")+"×",c.roas,p.roas,(p.roas?p.roas.toFixed(2):"0.00")+"×");
-  document.getElementById("m-range").textContent="· "+cF+" → "+cT+" vs "+pF+" → "+pT;
+  // traffic metrics from baked momentum
+  const mo=DATA.momentum;
+  document.getElementById("m-range").textContent="· "+mo.range.cur+" vs "+mo.range.prev;
+  document.getElementById("momTraffic").innerHTML=mo.metrics.map(x=>
+    "<div class='c'><div class='lbl'>"+x.label+"</div><div class='v'>"+fmtVal(x.cur,x.fmt)+"</div><div class='d'>"+badge2(x.cur,x.prev,x.goodUp)+"</div><div class='prev'>prev "+fmtVal(x.prev,x.fmt)+"</div></div>").join("");
 }
 
-/* ---------- Section: date range + previous-period comparison ---------- */
 function renderRange(){
-  const from=document.getElementById("from").value, to=document.getElementById("to").value;
+  const from=document.getElementById("from").value,to=document.getElementById("to").value;
   const cur=agg(from,to);
   const len=Math.round((new Date(to)-new Date(from))/86400000)+1;
-  const pTo=addDays(from,-1), pFrom=addDays(pTo,-(len-1));
+  const pTo=addDays(from,-1),pFrom=addDays(pTo,-(len-1));
   const prev=agg(pFrom,pTo);
-
   document.getElementById("k-sales").textContent=money(cur.sales);
   document.getElementById("k-sales-d").innerHTML=badge(cur.sales,prev.sales);
   document.getElementById("k-range").innerHTML="<span class='delta lbl'>"+from+" → "+to+"</span>";
@@ -171,13 +185,12 @@ function renderRange(){
   document.getElementById("k-aov").innerHTML="<span class='delta lbl'>AOV "+(cur.orders?money2(cur.sales/cur.orders):"—")+"</span>";
   document.getElementById("k-spend").textContent=money(cur.spend);
   document.getElementById("k-spend-d").innerHTML=badge(cur.spend,prev.spend);
-  document.getElementById("k-roas").textContent= cur.spend? cur.roas.toFixed(2)+"×" : "—";
+  document.getElementById("k-roas").textContent=cur.spend?cur.roas.toFixed(2)+"×":"—";
   document.getElementById("k-roas-d").innerHTML=badge(cur.roas,prev.roas);
   document.getElementById("k-days").textContent=intf(len);
   document.getElementById("k-perday").textContent="≈ "+money(cur.sales/len)+"/day · "+money(cur.spend/len)+" ad/day";
-
   const months={};
-  DATA.daily.forEach(d=>{ if(d.date>=from&&d.date<=to){ const m=d.date.slice(0,7); (months[m]=months[m]||{s:0,sp:0}); months[m].s+=d.sales; months[m].sp+=d.spend; } });
+  DATA.daily.forEach(d=>{ if(d.date>=from&&d.date<=to){const m=d.date.slice(0,7);(months[m]=months[m]||{s:0,sp:0});months[m].s+=d.sales;months[m].sp+=d.spend;} });
   const labels=Object.keys(months).sort();
   mk("rsChart",{ data:{ labels:labels.map(mlabel), datasets:[
     {type:"bar",label:"Store sales",data:labels.map(m=>+months[m].s.toFixed(2)),backgroundColor:C.teal,yAxisID:"y",order:2},
@@ -185,17 +198,33 @@ function renderRange(){
   ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
 }
 function setPreset(d){
-  const max=DATA.daily[DATA.daily.length-1].date, min=DATA.daily[0].date;
+  const max=DATA.daily[DATA.daily.length-1].date,min=DATA.daily[0].date;
   document.getElementById("to").value=max;
-  if(d==="all"){ document.getElementById("from").value=min; }
-  else { let iso=addDays(max,-(+d-1)); document.getElementById("from").value= iso<min?min:iso; }
-  document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active", b.dataset.d===String(d)));
+  document.getElementById("from").value= d==="all"?min:(()=>{let i=addDays(max,-(+d-1));return i<min?min:i;})();
+  document.querySelectorAll(".preset").forEach(b=>b.classList.toggle("active",b.dataset.d===String(d)));
   renderRange();
 }
 
-/* ---------- Product & channel windows ---------- */
+function renderProdPage(){
+  const per=10, pages=Math.max(1,Math.ceil(prodAll.length/per));
+  prodPage=Math.max(0,Math.min(prodPage,pages-1));
+  const slice=prodAll.slice(prodPage*per,prodPage*per+per);
+  document.querySelector("#prodTable tbody").innerHTML=slice.map((r,i)=>
+    "<tr><td>"+(prodPage*per+i+1)+"</td><td>"+r.title+"</td><td><span class='pill'>"+r.species+"</span></td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+money2(r.net)+"</td><td class='num'>"+intf(r.orders)+"</td></tr>").join("");
+  document.getElementById("pgInfo").textContent="Page "+(prodPage+1)+" of "+pages+" · "+prodAll.length+" products";
+  document.getElementById("pgPrev").disabled=prodPage===0;
+  document.getElementById("pgNext").disabled=prodPage>=pages-1;
+}
+
 function renderWindow(key){
   const d=DATA.windows[key]; if(!d) return;
+  // species boxes
+  const sps=(d.species||[]).filter(s=>s.label!=="Other / supplies");
+  const hero=sps.slice().sort((a,b)=>b.orders-a.orders)[0];
+  if(hero){ document.getElementById("b-hero").textContent=hero.label; document.getElementById("b-hero-s").textContent=intf(hero.orders)+" orders · "+money(hero.gross)+" gross"; }
+  const prods=(d.topProducts||[]).filter(p=>p.species!=="Other / supplies"&&p.orders>=1).map(p=>({...p,aov:p.gross/p.orders}));
+  const hiaov=prods.slice().sort((a,b)=>b.aov-a.aov)[0];
+  if(hiaov){ document.getElementById("b-aov").textContent=hiaov.title; document.getElementById("b-aov-s").textContent=money2(hiaov.aov)+" avg order · "+intf(hiaov.orders)+" orders"; }
   const sp=(d.species||[]).slice(0,10);
   mk("specChart",{ type:"bar", data:{ labels:sp.map(r=>r.label), datasets:[{label:"Gross sales",data:sp.map(r=>r.gross),backgroundColor:C.coral}]},
     options:{indexAxis:"y",responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>"$"+(v/1000)+"k"}}}}});
@@ -206,10 +235,9 @@ function renderWindow(key){
     {type:"bar",label:"Sessions",data:d.traffic.map(r=>r.sessions),backgroundColor:C.green,yAxisID:"y",order:2},
     {type:"line",label:"Conversion %",data:d.traffic.map(r=>r.cvr),borderColor:C.deep,backgroundColor:C.deep,yAxisID:"y1",tension:.3,order:1}
   ]}, options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},scales:{y:{position:"left"},y1:{position:"right",grid:{drawOnChartArea:false},ticks:{callback:v=>(+v).toFixed(2)+"%"}}}}});
-  document.querySelector("#prodTable tbody").innerHTML=(d.topProducts||[]).map(r=>
-    "<tr><td>"+r.title+"</td><td><span class='pill'>"+r.species+"</span></td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+money2(r.net)+"</td><td class='num'>"+intf(r.orders)+"</td></tr>").join("");
   document.querySelector("#specTable tbody").innerHTML=(d.species||[]).map(r=>
     "<tr><td>"+r.label+"</td><td class='num'>"+money2(r.gross)+"</td><td class='num'>"+intf(r.orders)+"</td><td class='num'>"+intf(r.products)+"</td></tr>").join("");
+  prodAll=(d.topProducts||[]); prodPage=0; renderProdPage();
 }
 
 async function load(){
@@ -221,15 +249,20 @@ async function load(){
   document.querySelector("#campTable tbody").innerHTML=(DATA.metaCampaigns||[]).map(c=>
     "<tr><td>"+c.name+"</td><td class='num'>"+money2(c.spend)+"</td></tr>").join("")
     +"<tr><td><b>Total</b></td><td class='num'><b>"+money2((DATA.metaCampaigns||[]).reduce((a,c)=>a+c.spend,0))+"</b></td></tr>";
-  const min=DATA.daily[0].date, max=DATA.daily[DATA.daily.length-1].date;
-  ["from","to"].forEach(id=>{ const el=document.getElementById(id); el.min=min; el.max=max; el.addEventListener("change",()=>{ document.querySelectorAll(".preset").forEach(b=>b.classList.remove("active")); renderRange(); }); });
-  document.querySelectorAll(".preset").forEach(b=> b.addEventListener("click",()=> setPreset(b.dataset.d)) );
-  renderMomentum();
+  // monthly traffic table
+  document.querySelector("#trafTable tbody").innerHTML=(DATA.monthlyTraffic||[]).map(r=>
+    "<tr><td>"+mlabel(r.month)+"</td><td class='num'>"+intf(r.sessions)+"</td><td class='num'>"+intf(r.completed)+"</td><td class='num'>"+(+r.cvr).toFixed(2)+"%</td></tr>").join("");
+  const min=DATA.daily[0].date,max=DATA.daily[DATA.daily.length-1].date;
+  ["from","to"].forEach(id=>{const el=document.getElementById(id);el.min=min;el.max=max;el.addEventListener("change",()=>{document.querySelectorAll(".preset").forEach(b=>b.classList.remove("active"));renderRange();});});
+  document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>setPreset(b.dataset.d)));
+  document.getElementById("pgPrev").addEventListener("click",()=>{prodPage--;renderProdPage();});
+  document.getElementById("pgNext").addEventListener("click",()=>{prodPage++;renderProdPage();});
+  if(DATA.momentum) renderMomentum();
   setPreset("90");
   const sel=document.getElementById("range");
-  let wkey=DATA.defaultWindow||"12"; try{ const s=localStorage.getItem("as_range"); if(s&&DATA.windows[s]) wkey=s; }catch(e){}
+  let wkey=DATA.defaultWindow||"12"; try{const s=localStorage.getItem("as_range"); if(s&&DATA.windows[s])wkey=s;}catch(e){}
   sel.value=wkey;
-  sel.addEventListener("change",e=>{ try{localStorage.setItem("as_range",e.target.value);}catch(_){ } renderWindow(e.target.value); });
+  sel.addEventListener("change",e=>{try{localStorage.setItem("as_range",e.target.value);}catch(_){ } renderWindow(e.target.value);});
   renderWindow(wkey);
 }
 load();

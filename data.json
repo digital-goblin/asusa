@@ -3223,5 +3223,143 @@
       "name": "New Leads Campaign",
       "spend": 95.92
     }
+  ],
+  "momentum": {
+    "range": {
+      "cur": "Jun 2 \u2013 Jun 8",
+      "prev": "May 26 \u2013 Jun 1"
+    },
+    "metrics": [
+      {
+        "label": "Users",
+        "cur": 2153,
+        "prev": 1904,
+        "fmt": "int",
+        "goodUp": true
+      },
+      {
+        "label": "Sessions",
+        "cur": 2543,
+        "prev": 2244,
+        "fmt": "int",
+        "goodUp": true
+      },
+      {
+        "label": "New customers",
+        "cur": 8,
+        "prev": 5,
+        "fmt": "int",
+        "goodUp": true
+      },
+      {
+        "label": "Returning customers",
+        "cur": 4,
+        "prev": 2,
+        "fmt": "int",
+        "goodUp": true
+      },
+      {
+        "label": "Bounce rate",
+        "cur": 60.3,
+        "prev": 55.6,
+        "fmt": "pct1",
+        "goodUp": false
+      },
+      {
+        "label": "Time on site",
+        "cur": 96,
+        "prev": 112,
+        "fmt": "dur",
+        "goodUp": true
+      },
+      {
+        "label": "Avg pages / visit",
+        "cur": 1.94,
+        "prev": 2.16,
+        "fmt": "num2",
+        "goodUp": true
+      },
+      {
+        "label": "CVR %",
+        "cur": 0.43,
+        "prev": 0.36,
+        "fmt": "pct2",
+        "goodUp": true
+      }
+    ]
+  },
+  "monthlyTraffic": [
+    {
+      "month": "2025-07",
+      "sessions": 1095,
+      "completed": 2,
+      "cvr": 0.18
+    },
+    {
+      "month": "2025-08",
+      "sessions": 2080,
+      "completed": 3,
+      "cvr": 0.14
+    },
+    {
+      "month": "2025-09",
+      "sessions": 5382,
+      "completed": 9,
+      "cvr": 0.17
+    },
+    {
+      "month": "2025-10",
+      "sessions": 5958,
+      "completed": 12,
+      "cvr": 0.2
+    },
+    {
+      "month": "2025-11",
+      "sessions": 4087,
+      "completed": 5,
+      "cvr": 0.12
+    },
+    {
+      "month": "2025-12",
+      "sessions": 6130,
+      "completed": 18,
+      "cvr": 0.29
+    },
+    {
+      "month": "2026-01",
+      "sessions": 13004,
+      "completed": 36,
+      "cvr": 0.28
+    },
+    {
+      "month": "2026-02",
+      "sessions": 8046,
+      "completed": 27,
+      "cvr": 0.34
+    },
+    {
+      "month": "2026-03",
+      "sessions": 9130,
+      "completed": 28,
+      "cvr": 0.31
+    },
+    {
+      "month": "2026-04",
+      "sessions": 8832,
+      "completed": 32,
+      "cvr": 0.36
+    },
+    {
+      "month": "2026-05",
+      "sessions": 8502,
+      "completed": 27,
+      "cvr": 0.32
+    },
+    {
+      "month": "2026-06",
+      "sessions": 1912,
+      "completed": 11,
+      "cvr": 0.58
+    }
   ]
 }
