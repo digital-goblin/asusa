@@ -35,7 +35,7 @@ input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-r
 .mom .v { font-size: 22px; font-weight: 700; color: #07414f; margin-top: 4px; }
 .mom .d { margin-top: 3px; font-size: 13px; }
 .mom .prev { color: #94a3b8; font-size: 11px; }
-.insights { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 6px 0 4px; }
+.insights { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 12px; margin: 6px 0 4px; }
 .ins { background: #fff; border: 1px solid #e2ecf0; border-left-width: 4px; border-radius: 10px; padding: 12px; }
 .ins.red { border-left-color: #dc2626; } .ins.amber { border-left-color: #d97706; } .ins.green { border-left-color: #16a34a; }
 .ins .h { font-size: 12.5px; font-weight: 700; color: #0f2b36; line-height: 1.25; }
@@ -170,24 +170,34 @@ function renderInsights(){
   const W=DATA.weekly; if(!W||W.length<2) return;
   const n=W.length;
   const cfg=[
-    {k:"sales",label:"Sales",fmt:v=>money(v),bad:"Revenue softening — revisit offers/promos and ad-spend allocation.",good:"Sales climbing — keep momentum; scale what's working."},
-    {k:"orders",label:"Orders",fmt:v=>intf(v),bad:"Order volume down — check traffic quality and on-site conversion.",good:"Order volume rising week over week."},
-    {k:"roas",label:"ROAS",fmt:v=>(+v).toFixed(2)+"×",bad:"Meta efficiency slipping — refresh creative, tighten audiences, review landing pages.",good:"ROAS improving — room to scale spend on top campaigns."},
-    {k:"ctr",label:"Meta CTR",fmt:v=>(+v).toFixed(2)+"%",bad:"Ad fatigue likely — refresh Meta creative (new hooks/images) and rotate ad sets.",good:"Creative resonating — strong CTR; scale the winners."},
-    {k:"cvr",label:"Conversion rate",fmt:v=>(+v).toFixed(2)+"%",bad:"Conversion dropping — audit product pages, pricing, checkout and site speed.",good:"Conversion improving — recent site/offer changes are working."},
+    {k:"sales",label:"Sales",goodUp:true,fmt:v=>money(v),bad:"Revenue softening — revisit offers/promos and ad-spend allocation.",good:"Sales climbing — keep momentum; scale what's working."},
+    {k:"orders",label:"Orders",goodUp:true,fmt:v=>intf(v),bad:"Order volume down — check traffic quality and on-site conversion.",good:"Order volume rising week over week."},
+    {k:"aov",label:"Avg order value",goodUp:true,fmt:v=>money2(v),bad:"AOV slipping — add bundles/upsells, a free-shipping threshold, or feature higher-ticket corals.",good:"Average order value rising."},
+    {k:"sessions",label:"Sessions",goodUp:true,fmt:v=>intf(v),bad:"Traffic falling — check ad delivery & organic search; lift top-of-funnel.",good:"Site traffic growing."},
+    {k:"users",label:"Visitors",goodUp:true,fmt:v=>intf(v),bad:"Fewer visitors — widen prospecting audiences / boost reach.",good:"Visitor count rising."},
+    {k:"cvr",label:"Conversion rate",goodUp:true,fmt:v=>(+v).toFixed(2)+"%",bad:"Conversion dropping — audit product pages, pricing, checkout and site speed.",good:"Conversion improving — recent site/offer changes are working."},
+    {k:"bounce",label:"Bounce rate",goodUp:false,fmt:v=>(+v).toFixed(1)+"%",bad:"Bounce climbing — tighten ad-to-landing-page match and improve page load / first impression.",good:"Bounce rate improving."},
+    {k:"roas",label:"ROAS",goodUp:true,fmt:v=>(+v).toFixed(2)+"×",bad:"Meta efficiency slipping — refresh creative, tighten audiences, review landing pages.",good:"ROAS improving — room to scale spend on top campaigns."},
+    {k:"ctr",label:"Meta CTR",goodUp:true,fmt:v=>(+v).toFixed(2)+"%",bad:"Ad fatigue likely — refresh Meta creative (new hooks/images) and rotate ad sets.",good:"Creative resonating — strong CTR; scale the winners."},
+    {k:"cpa",label:"Cost / order",goodUp:false,fmt:v=>money2(v),bad:"Cost to acquire an order is rising — improve creative/CVR or shift budget to efficient campaigns.",good:"Cost per order falling — acquisition getting cheaper."},
+    {k:"refundRate",label:"Refund rate",goodUp:false,fmt:v=>(+v).toFixed(1)+"%",bad:"Refunds rising — review livestock quality, packing/acclimation guidance and shipping (DOA risk).",good:"Refunds down."},
+    {k:"newCust",label:"New customers",goodUp:true,fmt:v=>intf(v),bad:"New-customer acquisition slowing — scale prospecting campaigns.",good:"New customers up."},
+    {k:"retCust",label:"Returning customers",goodUp:true,fmt:v=>intf(v),bad:"Repeat purchases slipping — lean on email/SMS flows, restock alerts and loyalty.",good:"Returning customers up — retention working."},
   ];
   function streak(k){ const d=i=>W[i][k]-W[i-1][k]; const last=d(n-1); const s=Math.sign(last); if(s===0)return{dir:0,len:0}; let len=0; for(let i=n-1;i>=1;i--){ if(Math.sign(d(i))===s) len++; else break; } return {dir:s,len}; }
   const cards=[];
   for(const c of cfg){
     const cur=W[n-1][c.k], prev=W[n-2][c.k]; if(prev===0) continue;
     const wow=(cur-prev)/Math.abs(prev)*100, st=streak(c.k), up=wow>0;
+    const goodUp=(c.goodUp!==false), good=(up===goodUp);
+    const dir=up?"up":"down", strk=(st.len>=3?" — "+st.len+" wks straight":"");
     let sev=0,tone,head,rec;
-    if(!up){
+    if(!good){
       if(st.len>=3){sev=100;tone="red";} else if(Math.abs(wow)>=20){sev=72;tone="red";} else if(Math.abs(wow)>=7){sev=42;tone="amber";}
-      head=c.label+" down "+Math.abs(wow).toFixed(0)+"%"+(st.len>=3?" — "+st.len+" wks straight":""); rec=c.bad;
+      head=c.label+" "+dir+" "+Math.abs(wow).toFixed(0)+"%"+strk; rec=c.bad;
     } else {
       if(st.len>=3){sev=58;tone="green";} else if(Math.abs(wow)>=20){sev=50;tone="green";} else if(Math.abs(wow)>=7){sev=24;tone="green";}
-      head=c.label+" up "+Math.abs(wow).toFixed(0)+"%"+(st.len>=3?" — "+st.len+" wks straight":""); rec=c.good;
+      head=c.label+" "+dir+" "+Math.abs(wow).toFixed(0)+"%"+strk; rec=c.good;
     }
     if(sev>0) cards.push({sev,tone,head,rec,sub:c.label+": "+c.fmt(prev)+" → "+c.fmt(cur)});
   }
@@ -195,7 +205,7 @@ function renderInsights(){
   if(sp>=15 && rs<0) cards.push({sev:80,tone:"red",head:"Scaling but efficiency dipping",sub:"Spend +"+sp.toFixed(0)+"%, ROAS "+(+W[n-2].roas).toFixed(2)+"→"+(+W[n-1].roas).toFixed(2)+"×",rec:"Adding budget faster than returns — pause/refresh underperforming ad sets before scaling more."});
   cards.sort((a,b)=>b.sev-a.sev);
   const icon=t=> t==="red"?"🔴":t==="amber"?"🟡":"🟢";
-  const top=cards.slice(0,5);
+  const top=cards.slice(0,6);
   document.getElementById("insights").innerHTML = top.length ? top.map(c=>
     "<div class='ins "+c.tone+"'><div class='h'>"+icon(c.tone)+" "+c.head+"</div><div class='m'>"+c.sub+"</div><div class='rec'>"+c.rec+"</div></div>").join("")
     : "<div class='ins green'><div class='h'>🟢 All key metrics stable</div><div class='m'>No major week-over-week swings.</div><div class='rec'>Keep doing what you're doing.</div></div>";
