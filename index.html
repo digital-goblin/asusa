@@ -35,6 +35,13 @@ input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-r
 .mom .v { font-size: 22px; font-weight: 700; color: #07414f; margin-top: 4px; }
 .mom .d { margin-top: 3px; font-size: 13px; }
 .mom .prev { color: #94a3b8; font-size: 11px; }
+.insights { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 6px 0 4px; }
+.ins { background: #fff; border: 1px solid #e2ecf0; border-left-width: 4px; border-radius: 10px; padding: 12px; }
+.ins.red { border-left-color: #dc2626; } .ins.amber { border-left-color: #d97706; } .ins.green { border-left-color: #16a34a; }
+.ins .h { font-size: 12.5px; font-weight: 700; color: #0f2b36; line-height: 1.25; }
+.ins .m { font-size: 11px; color: #6a8593; margin: 4px 0; }
+.ins .rec { font-size: 11.5px; color: #334155; }
+@media (max-width: 880px){ .insights{ grid-template-columns: 1fr 1fr; } }
 .boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
 .box { background: #f6fafb; border: 1px solid #d7e6ea; border-radius: 10px; padding: 10px 12px; }
 .box .lbl { font-size: 10.5px; text-transform: uppercase; letter-spacing: .03em; color: #6a8593; }
@@ -61,6 +68,10 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
 
   <div class="note" id="srcnote" style="display:none"></div>
+
+  <!-- ===== Insights & alerts ===== -->
+  <div class="section-title">Insights &amp; alerts <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· latest full week vs prior, with streak detection</span></div>
+  <div class="insights" id="insights"></div>
 
   <!-- ===== 7-day momentum ===== -->
   <div class="section-title">7-day momentum <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;" id="m-range"></span></div>
@@ -153,6 +164,41 @@ function badge2(cur,prev,goodUp){
   if(Math.abs(ch)<0.5) return "<span class='delta flat'>± 0%</span>";
   const up=ch>0, good=(up===goodUp);
   return "<span class='delta "+(good?"up":"down")+"'>"+(up?"▲":"▼")+" "+Math.abs(ch).toFixed(0)+"%</span>";
+}
+
+function renderInsights(){
+  const W=DATA.weekly; if(!W||W.length<2) return;
+  const n=W.length;
+  const cfg=[
+    {k:"sales",label:"Sales",fmt:v=>money(v),bad:"Revenue softening — revisit offers/promos and ad-spend allocation.",good:"Sales climbing — keep momentum; scale what's working."},
+    {k:"orders",label:"Orders",fmt:v=>intf(v),bad:"Order volume down — check traffic quality and on-site conversion.",good:"Order volume rising week over week."},
+    {k:"roas",label:"ROAS",fmt:v=>(+v).toFixed(2)+"×",bad:"Meta efficiency slipping — refresh creative, tighten audiences, review landing pages.",good:"ROAS improving — room to scale spend on top campaigns."},
+    {k:"ctr",label:"Meta CTR",fmt:v=>(+v).toFixed(2)+"%",bad:"Ad fatigue likely — refresh Meta creative (new hooks/images) and rotate ad sets.",good:"Creative resonating — strong CTR; scale the winners."},
+    {k:"cvr",label:"Conversion rate",fmt:v=>(+v).toFixed(2)+"%",bad:"Conversion dropping — audit product pages, pricing, checkout and site speed.",good:"Conversion improving — recent site/offer changes are working."},
+  ];
+  function streak(k){ const d=i=>W[i][k]-W[i-1][k]; const last=d(n-1); const s=Math.sign(last); if(s===0)return{dir:0,len:0}; let len=0; for(let i=n-1;i>=1;i--){ if(Math.sign(d(i))===s) len++; else break; } return {dir:s,len}; }
+  const cards=[];
+  for(const c of cfg){
+    const cur=W[n-1][c.k], prev=W[n-2][c.k]; if(prev===0) continue;
+    const wow=(cur-prev)/Math.abs(prev)*100, st=streak(c.k), up=wow>0;
+    let sev=0,tone,head,rec;
+    if(!up){
+      if(st.len>=3){sev=100;tone="red";} else if(Math.abs(wow)>=20){sev=72;tone="red";} else if(Math.abs(wow)>=7){sev=42;tone="amber";}
+      head=c.label+" down "+Math.abs(wow).toFixed(0)+"%"+(st.len>=3?" — "+st.len+" wks straight":""); rec=c.bad;
+    } else {
+      if(st.len>=3){sev=58;tone="green";} else if(Math.abs(wow)>=20){sev=50;tone="green";} else if(Math.abs(wow)>=7){sev=24;tone="green";}
+      head=c.label+" up "+Math.abs(wow).toFixed(0)+"%"+(st.len>=3?" — "+st.len+" wks straight":""); rec=c.good;
+    }
+    if(sev>0) cards.push({sev,tone,head,rec,sub:c.label+": "+c.fmt(prev)+" → "+c.fmt(cur)});
+  }
+  const sp=(W[n-1].spend-W[n-2].spend)/Math.abs(W[n-2].spend||1)*100, rs=W[n-1].roas-W[n-2].roas;
+  if(sp>=15 && rs<0) cards.push({sev:80,tone:"red",head:"Scaling but efficiency dipping",sub:"Spend +"+sp.toFixed(0)+"%, ROAS "+(+W[n-2].roas).toFixed(2)+"→"+(+W[n-1].roas).toFixed(2)+"×",rec:"Adding budget faster than returns — pause/refresh underperforming ad sets before scaling more."});
+  cards.sort((a,b)=>b.sev-a.sev);
+  const icon=t=> t==="red"?"🔴":t==="amber"?"🟡":"🟢";
+  const top=cards.slice(0,5);
+  document.getElementById("insights").innerHTML = top.length ? top.map(c=>
+    "<div class='ins "+c.tone+"'><div class='h'>"+icon(c.tone)+" "+c.head+"</div><div class='m'>"+c.sub+"</div><div class='rec'>"+c.rec+"</div></div>").join("")
+    : "<div class='ins green'><div class='h'>🟢 All key metrics stable</div><div class='m'>No major week-over-week swings.</div><div class='rec'>Keep doing what you're doing.</div></div>";
 }
 
 function renderMomentum(){
@@ -257,6 +303,7 @@ async function load(){
   document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>setPreset(b.dataset.d)));
   document.getElementById("pgPrev").addEventListener("click",()=>{prodPage--;renderProdPage();});
   document.getElementById("pgNext").addEventListener("click",()=>{prodPage++;renderProdPage();});
+  if(DATA.weekly) renderInsights();
   if(DATA.momentum) renderMomentum();
   setPreset("90");
   const sel=document.getElementById("range");
