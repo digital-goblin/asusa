@@ -377,7 +377,8 @@ function winRange(key){
    let pY=Y,pM=M-1; if(pM<1){pM=12;pY--;}
    const dim=new Date(pY,pM,0).getDate(); const pd=Math.min(D,dim);
    const pF=pY+"-"+pad(pM)+"-01", pT=pY+"-"+pad(pM)+"-"+pad(pd);
-   return {cF,cT,pF,pT,label:"· "+mlabel(cF)+" MTD ("+D+"d) vs "+mlabel(pF)+" same span"};
+   const MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+   return {cF,cT,pF,pT,label:"· "+MN[M-1]+" 1–"+D+" (MTD) vs "+MN[pM-1]+" 1–"+pd};
  }
  const N=+key, cT=max, cF=addDays(max,-(N-1)), pT=addDays(cF,-1), pF=addDays(pT,-(N-1));
  return {cF,cT,pF,pT,label:"· last "+N+" days vs prior "+N+" ("+cF+" → "+cT+")"};
