@@ -4997,5 +4997,143 @@
   "config": {
     "cogsPct": 0.4,
     "blendedReady": false
+  },
+  "momExtras": {
+    "7": {
+      "cur": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 469,
+          "units": 3
+        },
+        "coral": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "gross": 250,
+          "units": 1
+        },
+        "aov": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "price": 250
+        }
+      },
+      "prev": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 2468,
+          "units": 11
+        },
+        "coral": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "gross": 1133,
+          "units": 4
+        },
+        "aov": {
+          "name": "WYSIWYG Holy Grail Torch",
+          "price": 299
+        }
+      }
+    },
+    "14": {
+      "cur": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 2937,
+          "units": 14
+        },
+        "coral": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "gross": 1383,
+          "units": 5
+        },
+        "aov": {
+          "name": "WYSIWYG Holy Grail Torch",
+          "price": 299
+        }
+      },
+      "prev": {
+        "species": {
+          "name": "Acropora / SPS",
+          "gross": 389,
+          "units": 4
+        },
+        "coral": {
+          "name": "Walt Disney Acropora Coral",
+          "gross": 229,
+          "units": 1
+        },
+        "aov": {
+          "name": "Walt Disney Acropora Coral",
+          "price": 229
+        }
+      }
+    },
+    "30": {
+      "cur": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 2937,
+          "units": 14
+        },
+        "coral": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "gross": 1383,
+          "units": 5
+        },
+        "aov": {
+          "name": "WYSIWYG Holy Grail Torch",
+          "price": 299
+        }
+      },
+      "prev": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 1166,
+          "units": 9
+        },
+        "coral": {
+          "name": "TSA Holy Grail Torch Coral",
+          "gross": 289,
+          "units": 1
+        },
+        "aov": {
+          "name": "TSA Holy Grail Torch Coral",
+          "price": 289
+        }
+      }
+    },
+    "mtd": {
+      "cur": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 1542,
+          "units": 8
+        },
+        "coral": {
+          "name": "WYSIWYG Hammer Coral Garden",
+          "gross": 844,
+          "units": 3
+        },
+        "aov": {
+          "name": "TSA Holy Grail Torch Coral",
+          "price": 289
+        }
+      },
+      "prev": {
+        "species": {
+          "name": "Torch / Hammer / Euphyllia",
+          "gross": 378,
+          "units": 4
+        },
+        "coral": {
+          "name": "WYSIWYG Goniopora Coral Garden",
+          "gross": 198,
+          "units": 1
+        },
+        "aov": {
+          "name": "WYSIWYG Goniopora Coral Garden",
+          "price": 198
+        }
+      }
+    }
   }
 }

@@ -120,6 +120,7 @@ body.view-data .mread{display:none!important}
   </div>
   <div class="mread summary" id="mread"></div>
   <div id="momRows"></div>
+  <div id="momExtras"></div>
 
   <!-- ===== Sales & Meta Ads — date range ===== -->
   <div class="section-title">Sales &amp; Meta Ads — choose any date range</div>
@@ -438,6 +439,27 @@ function renderMomentum2(key){
    html+="</div>";
  }
  document.getElementById("momRows").innerHTML=html;
+ // top-sellers comparison boxes
+ const exEl=document.getElementById("momExtras"); const ex=(DATA.momExtras||{})[key];
+ if(exEl){
+   if(ex){
+     const c=ex.cur||{}, p=ex.prev||{};
+     const box=(label,curName,curSub,prevName,prevSub)=>{
+       const changed = prevName && curName && curName!==prevName;
+       return "<div class='tile'><div class='tl'>"+label+"</div>"
+        +"<div class='tv' style='font-size:15px;line-height:1.3'>"+(curName||"—")+"</div>"
+        +"<div style='font-size:12.5px;color:#0a91a8;font-weight:700;margin-top:3px'>"+(curSub||"")+"</div>"
+        +"<div class='tp'>prev: "+(prevName||"—")+(prevSub?" · "+prevSub:"")+"</div>"
+        +"<div class='blurb'>"+(curName?(changed?"New leader vs last period — watch if it sticks.":"Same leader as last period — your reliable mover; keep it stocked & featured."):"No coral sales recorded in this window.")+"</div></div>";
+     };
+     let h="<div class='rowlabel'>Top sellers this window vs prior</div><div class='mrow'>";
+     h+=box("Top species sold", c.species&&c.species.name, c.species?("$"+intf(c.species.gross)+" · "+c.species.units+" sold"):"", p.species&&p.species.name, p.species?("$"+intf(p.species.gross)):"");
+     h+=box("Top specific coral", c.coral&&c.coral.name, c.coral?("$"+intf(c.coral.gross)+(c.coral.units>1?" · "+c.coral.units+" sold":"")):"", p.coral&&p.coral.name, p.coral?("$"+intf(p.coral.gross)):"");
+     h+=box("Highest-value sale", c.aov&&c.aov.name, c.aov?("$"+intf(c.aov.price)):"", p.aov&&p.aov.name, p.aov?("$"+intf(p.aov.price)):"");
+     h+="</div>";
+     exEl.innerHTML=h;
+   } else exEl.innerHTML="";
+ }
 }
 
 function renderMomentum(){
