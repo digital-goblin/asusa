@@ -1,7 +1,7 @@
 {
   "meta": {
     "store": "Aquarium Show (aquariumshowusa.com)",
-    "generatedAt": "2026-06-08T00:00:00Z",
+    "generatedAt": "2026-06-11T00:00:00Z",
     "currency": "USD",
     "source": "Built from Shopify + Meta Ads (Windsor.ai, account 'Aquarium Show Sunrise'). Fish-tank/hardware orders excluded (#1141,#1021,#1073). Axolotl items excluded (none currently). Date range drives sales + ad-spend KPIs (day precision); species/products/channels use the 3/6/12-month windows."
   },
@@ -3195,7 +3195,19 @@
       "date": "2026-06-08",
       "sales": 129.99,
       "orders": 1,
-      "spend": 170.12
+      "spend": 170.16
+    },
+    {
+      "date": "2026-06-09",
+      "sales": 0,
+      "orders": 0,
+      "spend": 175.53
+    },
+    {
+      "date": "2026-06-10",
+      "sales": 0,
+      "orders": 0,
+      "spend": 176.99
     }
   ],
   "metaCampaigns": [
@@ -3226,63 +3238,63 @@
   ],
   "momentum": {
     "range": {
-      "cur": "Jun 2 \u2013 Jun 8",
-      "prev": "May 26 \u2013 Jun 1"
+      "cur": "Jun 4 \u2013 Jun 10",
+      "prev": "May 28 \u2013 Jun 3"
     },
     "metrics": [
       {
         "label": "Users",
-        "cur": 2153,
-        "prev": 1904,
+        "cur": 2115,
+        "prev": 2028,
         "fmt": "int",
         "goodUp": true
       },
       {
         "label": "Sessions",
-        "cur": 2543,
-        "prev": 2244,
+        "cur": 2441,
+        "prev": 2398,
         "fmt": "int",
         "goodUp": true
       },
       {
         "label": "New customers",
-        "cur": 8,
-        "prev": 5,
+        "cur": 4,
+        "prev": 9,
         "fmt": "int",
         "goodUp": true
       },
       {
         "label": "Returning customers",
-        "cur": 4,
-        "prev": 2,
+        "cur": 3,
+        "prev": 3,
         "fmt": "int",
         "goodUp": true
       },
       {
         "label": "Bounce rate",
-        "cur": 60.3,
-        "prev": 55.6,
+        "cur": 60.6,
+        "prev": 56.9,
         "fmt": "pct1",
         "goodUp": false
       },
       {
         "label": "Time on site",
-        "cur": 96,
-        "prev": 112,
+        "cur": 90,
+        "prev": 109,
         "fmt": "dur",
         "goodUp": true
       },
       {
         "label": "Avg pages / visit",
-        "cur": 1.94,
-        "prev": 2.16,
+        "cur": 1.89,
+        "prev": 2.11,
         "fmt": "num2",
         "goodUp": true
       },
       {
         "label": "CVR %",
-        "cur": 0.43,
-        "prev": 0.36,
+        "cur": 0.25,
+        "prev": 0.54,
         "fmt": "pct2",
         "goodUp": true
       }

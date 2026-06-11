@@ -73,6 +73,10 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   <div class="section-title">Insights &amp; alerts <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· latest full week vs prior, with streak detection</span></div>
   <div class="insights" id="insights"></div>
 
+  <!-- ===== Scale meter ===== -->
+  <div class="section-title">Should we scale Meta spend? <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· based on trailing-4-week ROAS vs target</span></div>
+  <div id="scaleMeter"></div>
+
   <!-- ===== 7-day momentum ===== -->
   <div class="section-title">7-day momentum <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;" id="m-range"></span></div>
   <div class="mom">
@@ -211,6 +215,70 @@ function renderInsights(){
     : "<div class='ins green'><div class='h'>🟢 All key metrics stable</div><div class='m'>No major week-over-week swings.</div><div class='rec'>Keep doing what you're doing.</div></div>";
 }
 
+function renderScale(){
+  const W=DATA.weekly; if(!W||W.length<4) return;
+  const TARGET=3.0, BREAKEVEN=2.0;
+  const l4=W.slice(-4);
+  const sales=l4.reduce((a,x)=>a+(+x.sales),0), spend=l4.reduce((a,x)=>a+(+x.spend),0);
+  const t4=spend? sales/spend : 0;
+  const lw=W[W.length-1], spend4ago=W[W.length-4].spend;
+  const spendGrow=spend4ago? (lw.spend-spend4ago)/spend4ago*100 : 0;
+  const r=TARGET? t4/TARGET : 0;
+  // rolling last-7-days ROAS from daily (caveat signal)
+  const max=DATA.daily[DATA.daily.length-1].date;
+  const c7=agg(addDays(max,-6),max); const r7=c7.roas||0;
+  let pct,tone,verdict;
+  if(r>=1.30){pct=25;tone="green";}
+  else if(r>=1.15){pct=20;tone="green";}
+  else if(r>=1.00){pct=15;tone="green";}
+  else if(r>=0.85){pct=0;tone="amber";}
+  else if(r>=0.70){pct=-15;tone="red";}
+  else{pct=-25;tone="red";}
+  verdict = pct>0?"YES — SCALE UP" : pct<0?"NO — PULL BACK" : "HOLD STEADY";
+  const dollarNow=lw.spend, dollarNew=Math.round(dollarNow*(1+pct/100));
+  const col={green:"#16a34a",amber:"#d97706",red:"#dc2626"}[tone];
+  const bg ={green:"#ecfdf5",amber:"#fffbeb",red:"#fef2f2"}[tone];
+  // gauge: map ROAS 0..6 to 0..100%
+  const pos=Math.max(2,Math.min(98, t4/6*100));
+  const tickBE=BREAKEVEN/6*100, tickTG=TARGET/6*100;
+  const arrow = pct>0?"▲":pct<0?"▼":"■";
+  const caveat = (pct>0 && r7>0 && r7<BREAKEVEN)
+    ? "<div style='margin-top:10px;padding:9px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:12.5px;color:#92400e'>⚠ Last 7 days ROAS "+r7.toFixed(1)+"× — soft patch or reporting lag. Confirm recent orders are syncing before adding budget.</div>"
+    : "";
+  const html =
+  "<div style='background:"+bg+";border:1px solid "+col+"33;border-radius:14px;padding:18px 20px'>"
+    +"<div style='display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between'>"
+      +"<div>"
+        +"<div style='display:inline-flex;align-items:center;gap:8px;background:"+col+";color:#fff;font-weight:800;font-size:15px;letter-spacing:.3px;padding:8px 16px;border-radius:999px'>"+arrow+" "+verdict+"</div>"
+        +"<div style='margin-top:8px;font-size:22px;font-weight:800;color:"+col+"'>"+(pct>0?"+":"")+pct+"% Meta budget</div>"
+        +"<div style='font-size:12.5px;color:#475569;margin-top:2px'>≈ $"+intf(dollarNow)+"/wk → <b>$"+intf(dollarNew)+"/wk</b></div>"
+      +"</div>"
+      +"<div style='flex:1;min-width:240px'>"
+        +"<div style='display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:4px'><span>ROAS</span><span>trailing 4 wks: <b style='color:"+col+"'>"+t4.toFixed(2)+"×</b></span></div>"
+        +"<div style='position:relative;height:16px;border-radius:9px;background:linear-gradient(90deg,#dc2626 0%,#dc2626 28%,#f59e0b 33%,#f59e0b 47%,#84cc16 55%,#16a34a 100%)'>"
+          +"<div style='position:absolute;top:-4px;left:"+tickBE+"%;width:1px;height:24px;background:#475569'></div>"
+          +"<div style='position:absolute;top:-4px;left:"+tickTG+"%;width:1px;height:24px;background:#0f172a'></div>"
+          +"<div style='position:absolute;top:50%;left:"+pos+"%;transform:translate(-50%,-50%);width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:11px solid #0f172a'></div>"
+          +"<div style='position:absolute;top:50%;left:"+pos+"%;transform:translate(-50%,-50%) translateY(6px);width:14px;height:14px'></div>"
+        +"</div>"
+        +"<div style='position:relative;height:14px;font-size:10px;color:#64748b'>"
+          +"<span style='position:absolute;left:"+tickBE+"%;transform:translateX(-50%)'>breakeven "+BREAKEVEN.toFixed(1)+"×</span>"
+          +"<span style='position:absolute;left:"+tickTG+"%;transform:translateX(-50%)'>target "+TARGET.toFixed(1)+"×</span>"
+        +"</div>"
+      +"</div>"
+    +"</div>"
+    +"<div style='margin-top:12px;font-size:13px;color:#334155;line-height:1.5'>"
+      +(pct>0
+        ? "Returns are above target — there's room to add budget. Last week pulled <b>"+(+lw.roas).toFixed(2)+"×</b> on <b>$"+intf(lw.spend)+"</b> (spend "+(spendGrow>=0?"+":"")+spendGrow.toFixed(0)+"% over 4 wks). Scale your best-ROAS campaigns ~"+pct+"%; cap any single ad-set increase at ~20% every 3–4 days to protect learning."
+        : pct<0
+        ? "Returns are below target — pull spend back ~"+Math.abs(pct)+"% and shift budget to your most efficient campaigns/creative before scaling again."
+        : "Returns are near target — hold spend steady, optimize creative and landing pages, and re-check next week before scaling.")
+    +"</div>"
+    +caveat
+  +"</div>";
+  document.getElementById("scaleMeter").innerHTML=html;
+}
+
 function renderMomentum(){
   const max=DATA.daily[DATA.daily.length-1].date;
   const cF=addDays(max,-6),cT=max,pT=addDays(cF,-1),pF=addDays(pT,-6);
@@ -314,6 +382,7 @@ async function load(){
   document.getElementById("pgPrev").addEventListener("click",()=>{prodPage--;renderProdPage();});
   document.getElementById("pgNext").addEventListener("click",()=>{prodPage++;renderProdPage();});
   if(DATA.weekly) renderInsights();
+  if(DATA.weekly&&DATA.daily) renderScale();
   if(DATA.momentum) renderMomentum();
   setPreset("90");
   const sel=document.getElementById("range");
