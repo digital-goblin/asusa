@@ -85,6 +85,16 @@ body.view-simple .chartonly{display:none!important}
 body.view-data .blurb{display:none!important}
 body.view-data .summary{display:none!important}
 body.view-data .mread{display:none!important}
+/* center all content */
+.section-title{text-align:center}
+.controls{justify-content:center}
+.kpis{display:flex;flex-wrap:wrap;justify-content:center}
+.kpis .kpi{flex:1 1 200px;max-width:250px}
+.card h2,.card .hint{text-align:center}
+.boxes{justify-content:center}
+.pager{justify-content:center}
+table{margin-left:auto;margin-right:auto}
+.foot{text-align:center}
 </style>
 </head>
 <body>
@@ -171,8 +181,8 @@ body.view-data .mread{display:none!important}
     <div class="pager"><button class="pg" id="pgPrev">‹ Prev</button><span id="pgInfo"></span><button class="pg" id="pgNext">Next ›</button></div>
   </div>
   <div class="grid2">
-    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Sessions (bars) and conversion rate (line), by month.</p><canvas id="sessChart" height="150"></canvas>
-      <table id="trafTable" style="margin-top:12px"><thead><tr><th>Month</th><th class="num">Sessions</th><th class="num">Checkouts</th><th class="num">CVR %</th></tr></thead><tbody></tbody></table>
+    <div class="card"><h2>Traffic &amp; conversion</h2><p class="hint">Full funnel by month: users, sessions, orders, AOV, ATC% and CVR%. (Chart: sessions bars + conversion line.)</p><canvas id="sessChart" height="150"></canvas>
+      <table id="trafTable" style="margin-top:12px"><thead><tr><th>Month</th><th class="num">Users</th><th class="num">Sessions</th><th class="num">Orders</th><th class="num">AOV</th><th class="num">ATC %</th><th class="num">CVR %</th></tr></thead><tbody></tbody></table>
     </div>
     <div class="card"><h2>Species by type — ranked</h2><p class="hint">Gross sales, orders, product count by type.</p>
       <table id="specTable"><thead><tr><th>Species/Type</th><th class="num">Gross</th><th class="num">Orders</th><th class="num">Products</th></tr></thead><tbody></tbody></table>
@@ -557,8 +567,8 @@ async function load(){
     "<tr><td>"+c.name+"</td><td class='num'>"+money2(c.spend)+"</td></tr>").join("")
     +"<tr><td><b>Total</b></td><td class='num'><b>"+money2((DATA.metaCampaigns||[]).reduce((a,c)=>a+c.spend,0))+"</b></td></tr>";
   // monthly traffic table
-  document.querySelector("#trafTable tbody").innerHTML=(DATA.monthlyTraffic||[]).map(r=>
-    "<tr><td>"+mlabel(r.month)+"</td><td class='num'>"+intf(r.sessions)+"</td><td class='num'>"+intf(r.completed)+"</td><td class='num'>"+(+r.cvr).toFixed(2)+"%</td></tr>").join("");
+  document.querySelector("#trafTable tbody").innerHTML=(DATA.monthlyTraffic2||DATA.monthlyTraffic||[]).map(r=>
+    "<tr><td>"+mlabel(r.month)+"</td><td class='num'>"+intf(r.users)+"</td><td class='num'>"+intf(r.sessions)+"</td><td class='num'>"+intf(r.orders!=null?r.orders:r.completed)+"</td><td class='num'>"+money2(r.aov||0)+"</td><td class='num'>"+(+(r.atc||0)).toFixed(2)+"%</td><td class='num'>"+(+r.cvr).toFixed(2)+"%</td></tr>").join("");
   const min=DATA.daily[0].date,max=DATA.daily[DATA.daily.length-1].date;
   ["from","to"].forEach(id=>{const el=document.getElementById(id);el.min=min;el.max=max;el.addEventListener("change",()=>{document.querySelectorAll(".preset").forEach(b=>b.classList.remove("active"));renderRange();});});
   document.querySelectorAll(".preset").forEach(b=>b.addEventListener("click",()=>setPreset(b.dataset.d)));

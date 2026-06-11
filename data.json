@@ -5135,5 +5135,124 @@
         }
       }
     }
-  }
+  },
+  "monthlyTraffic2": [
+    {
+      "month": "2025-06-01",
+      "users": 665,
+      "sessions": 911,
+      "orders": 0,
+      "aov": 0,
+      "atc": 1.1,
+      "cvr": 0.0
+    },
+    {
+      "month": "2025-07-01",
+      "users": 732,
+      "sessions": 1025,
+      "orders": 2,
+      "aov": 261.98,
+      "atc": 2.73,
+      "cvr": 0.2
+    },
+    {
+      "month": "2025-08-01",
+      "users": 1607,
+      "sessions": 1956,
+      "orders": 4,
+      "aov": 275.62,
+      "atc": 2.04,
+      "cvr": 0.15
+    },
+    {
+      "month": "2025-09-01",
+      "users": 3965,
+      "sessions": 5297,
+      "orders": 12,
+      "aov": 247.72,
+      "atc": 5.64,
+      "cvr": 0.17
+    },
+    {
+      "month": "2025-10-01",
+      "users": 3534,
+      "sessions": 5293,
+      "orders": 23,
+      "aov": 250.85,
+      "atc": 5.95,
+      "cvr": 0.23
+    },
+    {
+      "month": "2025-11-01",
+      "users": 2466,
+      "sessions": 3701,
+      "orders": 5,
+      "aov": 683.36,
+      "atc": 9.75,
+      "cvr": 0.14
+    },
+    {
+      "month": "2025-12-01",
+      "users": 3870,
+      "sessions": 5735,
+      "orders": 20,
+      "aov": 266.36,
+      "atc": 9.75,
+      "cvr": 0.31
+    },
+    {
+      "month": "2026-01-01",
+      "users": 9475,
+      "sessions": 13674,
+      "orders": 40,
+      "aov": 297.86,
+      "atc": 10.46,
+      "cvr": 0.26
+    },
+    {
+      "month": "2026-02-01",
+      "users": 6456,
+      "sessions": 9086,
+      "orders": 32,
+      "aov": 278.42,
+      "atc": 8.57,
+      "cvr": 0.3
+    },
+    {
+      "month": "2026-03-01",
+      "users": 6923,
+      "sessions": 9841,
+      "orders": 30,
+      "aov": 269.57,
+      "atc": 7.66,
+      "cvr": 0.28
+    },
+    {
+      "month": "2026-04-01",
+      "users": 7039,
+      "sessions": 9893,
+      "orders": 36,
+      "aov": 218.26,
+      "atc": 6.93,
+      "cvr": 0.32
+    },
+    {
+      "month": "2026-05-01",
+      "users": 6698,
+      "sessions": 9218,
+      "orders": 29,
+      "aov": 261.84,
+      "atc": 7.96,
+      "cvr": 0.29
+    },
+    {
+      "month": "2026-06-01",
+      "users": 3021,
+      "sessions": 3720,
+      "orders": 13,
+      "aov": 351.23,
+      "atc": 6.72,
+      "cvr": 0.32
+    }
+  ]
 }
