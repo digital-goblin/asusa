@@ -193,10 +193,10 @@ function renderInsights(){
     const dir=up?"up":"down", strk=(st.len>=3?" — "+st.len+" wks straight":"");
     let sev=0,tone,head,rec;
     if(!good){
-      if(st.len>=3){sev=100;tone="red";} else if(Math.abs(wow)>=20){sev=72;tone="red";} else if(Math.abs(wow)>=7){sev=42;tone="amber";}
+      if(st.len>=3){sev=100;tone="red";} else if(Math.abs(wow)>=20){sev=80;tone="red";} else if(Math.abs(wow)>=7){sev=60;tone="amber";}
       head=c.label+" "+dir+" "+Math.abs(wow).toFixed(0)+"%"+strk; rec=c.bad;
     } else {
-      if(st.len>=3){sev=58;tone="green";} else if(Math.abs(wow)>=20){sev=50;tone="green";} else if(Math.abs(wow)>=7){sev=24;tone="green";}
+      if(st.len>=3){sev=50;tone="green";} else if(Math.abs(wow)>=20){sev=45;tone="green";} else if(Math.abs(wow)>=7){sev=25;tone="green";}
       head=c.label+" "+dir+" "+Math.abs(wow).toFixed(0)+"%"+strk; rec=c.good;
     }
     if(sev>0) cards.push({sev,tone,head,rec,sub:c.label+": "+c.fmt(prev)+" → "+c.fmt(cur)});
