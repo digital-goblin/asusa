@@ -37,7 +37,7 @@ input[type=date], select { padding: 6px 9px; border: 1px solid #c5d6dd; border-r
 .mom .prev { color: #94a3b8; font-size: 11px; }
 .insights { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 12px; margin: 6px 0 4px; }
 .ins { background: #fff; border: 1px solid #e2ecf0; border-left-width: 4px; border-radius: 10px; padding: 12px; }
-.ins.red { border-left-color: #dc2626; } .ins.amber { border-left-color: #d97706; } .ins.green { border-left-color: #16a34a; }
+.ins.red { border-left-color: #dc2626; } .ins.amber { border-left-color: #d97706; } .ins.green { border-left-color: #16a34a; } .ins.blue { border-left-color: #2563eb; background:#f8fbff; }
 .ins .h { font-size: 12.5px; font-weight: 700; color: #0f2b36; line-height: 1.25; }
 .ins .m { font-size: 11px; color: #6a8593; margin: 4px 0; }
 .ins .rec { font-size: 11.5px; color: #334155; }
@@ -60,32 +60,66 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .note { background: #fff7e6; border: 1px solid #f0d9a8; color: #7a5b13; border-radius: 8px; padding: 9px 12px; font-size: 12.5px; margin: 12px 0; }
 .foot { color: #8aa1ab; font-size: 11.5px; margin-top: 18px; text-align: center; }
 @media (max-width: 880px){ .kpis,.mom{ grid-template-columns: repeat(2,1fr);} .grid2,.boxes{ grid-template-columns: 1fr; } }
+/* view toggle */
+.viewbar{display:flex;justify-content:center;gap:6px;margin:14px 0 6px}
+.vbtn{border:1px solid #cfe0e6;background:#fff;color:#0a5566;padding:6px 16px;border-radius:999px;font-size:13px;font-weight:600;cursor:pointer}
+.vbtn.on{background:#0a91a8;color:#fff;border-color:#0a91a8}
+.viewhint{text-align:center;font-size:11.5px;color:#9aabb3;margin-bottom:6px}
+/* momentum tabs */
+.mtabs{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.mtab{border:1px solid #cfe0e6;background:#fff;color:#0a5566;padding:6px 15px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.mtab.on{background:#07414f;color:#fff;border-color:#07414f}
+/* centered metric rows */
+.mrow{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:14px}
+.tile{flex:1 1 210px;max-width:265px;background:#fff;border:1px solid #e7eef1;border-radius:12px;padding:14px 16px;text-align:center}
+.tile .tl{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#5a7682;font-weight:600}
+.tile .tv{font-size:24px;font-weight:800;color:#07414f;margin-top:3px}
+.tile .td{margin-top:4px}
+.tile .tp{font-size:11px;color:#9aabb3;margin-top:3px}
+.tile .blurb{font-size:11.5px;color:#5f7785;margin-top:9px;line-height:1.42;border-top:1px dashed #e7eef1;padding-top:8px;text-align:left}
+.mread{max-width:920px;margin:0 auto 16px;background:#f0f9fb;border:1px solid #cdeaf0;border-radius:12px;padding:12px 16px;font-size:13px;color:#0a5566;text-align:center;line-height:1.5}
+.rowlabel{text-align:center;font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:#9fb3bc;margin:2px 0 6px}
+/* view modes */
+body.view-simple canvas{display:none!important}
+body.view-simple .chartonly{display:none!important}
+body.view-data .blurb{display:none!important}
+body.view-data .summary{display:none!important}
+body.view-data .mread{display:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
+  <div style="text-align:center"><h1>🐠 Aquarium Show — Performance &amp; Sales Tracker</h1>
   <p class="sub">aquariumshowusa.com · USD · <span id="gen">—</span></p></div>
 
-  <div class="note" id="srcnote" style="display:none"></div>
+  <div class="viewbar">
+    <button class="vbtn" data-view="simple">Simple</button>
+    <button class="vbtn on" data-view="full">Full</button>
+    <button class="vbtn" data-view="data">Data</button>
+  </div>
+  <div class="viewhint">Simple = insights, no charts · Data = charts + numbers, no write-ups · Full = everything</div>
 
   <!-- ===== Insights & alerts ===== -->
-  <div class="section-title">Insights &amp; alerts <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· latest full week vs prior, with streak detection</span></div>
-  <div class="insights" id="insights"></div>
+  <div class="section-title summary">Insights &amp; alerts <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· latest full week vs prior, with streak detection</span></div>
+  <div class="insights summary" id="insights"></div>
+
+  <div class="section-title summary">Opportunities &amp; growth ideas <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· channel mix, lifecycle, organic, merchandising</span></div>
+  <div class="insights summary" id="oppo"></div>
 
   <!-- ===== Scale meter ===== -->
-  <div class="section-title">Should we scale Meta spend? <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· based on trailing-4-week ROAS vs target</span></div>
-  <div id="scaleMeter"></div>
+  <div class="section-title summary">Should we scale Meta spend? <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;">· based on trailing-4-week ROAS vs target</span></div>
+  <div id="scaleMeter" class="summary"></div>
 
-  <!-- ===== 7-day momentum ===== -->
-  <div class="section-title">7-day momentum <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;" id="m-range"></span></div>
-  <div class="mom">
-    <div class="c"><div class="lbl">Sales</div><div class="v" id="m-sales-v">—</div><div class="d" id="m-sales-d"></div><div class="prev" id="m-sales-p"></div></div>
-    <div class="c"><div class="lbl">Orders</div><div class="v" id="m-orders-v">—</div><div class="d" id="m-orders-d"></div><div class="prev" id="m-orders-p"></div></div>
-    <div class="c"><div class="lbl">Meta ad spend</div><div class="v" id="m-spend-v">—</div><div class="d" id="m-spend-d"></div><div class="prev" id="m-spend-p"></div></div>
-    <div class="c"><div class="lbl">ROAS</div><div class="v" id="m-roas-v">—</div><div class="d" id="m-roas-d"></div><div class="prev" id="m-roas-p"></div></div>
+  <!-- ===== Momentum ===== -->
+  <div class="section-title">Momentum <span style="font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;" id="m-range"></span></div>
+  <div class="mtabs">
+    <button class="mtab on" data-w="7">7 vs 7</button>
+    <button class="mtab" data-w="14">14 vs 14</button>
+    <button class="mtab" data-w="30">30 vs 30</button>
+    <button class="mtab" data-w="mtd">MTD vs last month</button>
   </div>
-  <div class="mom" id="momTraffic"></div>
+  <div class="mread summary" id="mread"></div>
+  <div id="momRows"></div>
 
   <!-- ===== Sales & Meta Ads — date range ===== -->
   <div class="section-title">Sales &amp; Meta Ads — choose any date range</div>
@@ -108,7 +142,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     <div class="kpi"><div class="label">Days in range</div><div class="value" id="k-days">—</div><div class="meta" id="k-perday">&nbsp;</div></div>
   </div>
   <div class="grid2">
-    <div class="card"><h2>Revenue vs. Meta spend</h2><p class="hint">Monthly store sales (bars) and Meta ad spend (line) over the selected range.</p><canvas id="rsChart" height="150"></canvas></div>
+    <div class="card chartonly"><h2>Revenue vs. Meta spend</h2><p class="hint">Monthly store sales (bars) and Meta ad spend (line) over the selected range.</p><canvas id="rsChart" height="150"></canvas></div>
     <div class="card"><h2>Meta spend by campaign</h2><p class="hint">Trailing 12 months (whole-account = this initiative).</p>
       <table id="campTable"><thead><tr><th>Campaign</th><th class="num">Spend</th></tr></thead><tbody></tbody></table>
     </div>
@@ -129,7 +163,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
       </div>
       <canvas id="specChart" height="150"></canvas>
     </div>
-    <div class="card"><h2>Marketing channels</h2><p class="hint">Attributed sales by referrer (Meta / Google / IG).</p><canvas id="chanChart" height="150"></canvas></div>
+    <div class="card chartonly"><h2>Marketing channels</h2><p class="hint">Attributed sales by referrer (Meta / Google / IG).</p><canvas id="chanChart" height="150"></canvas></div>
   </div>
   <div class="card"><h2>Top products</h2><p class="hint">Best sellers by gross sales.</p>
     <table id="prodTable"><thead><tr><th>#</th><th>Product</th><th>Species/Type</th><th class="num">Gross</th><th class="num">Net</th><th class="num">Orders</th></tr></thead><tbody></tbody></table>
@@ -215,6 +249,20 @@ function renderInsights(){
     : "<div class='ins green'><div class='h'>🟢 All key metrics stable</div><div class='m'>No major week-over-week swings.</div><div class='rec'>Keep doing what you're doing.</div></div>";
 }
 
+function renderOppo(){
+  const box=document.getElementById("oppo"); if(!box) return;
+  const W=DATA.weekly||[]; const lw=W[W.length-1]||{};
+  let nc=0,rc=0; W.slice(-4).forEach(w=>{nc+=(w.newCust||0);rc+=(w.retCust||0);});
+  const rr=(nc+rc)?rc/(nc+rc)*100:0;
+  const cards=[];
+  cards.push({tone:"blue",h:"💡 Activate lifecycle email & SMS flows",m:"Repeat-customer rate ~"+rr.toFixed(0)+"% (last 4 wks)",rec:"Stand up Klaviyo flows — welcome, browse & cart abandonment, post-purchase coral-care, restock alerts, and a 60-day win-back. Owned revenue at near-zero CAC and the biggest lever for a low repeat rate."});
+  cards.push({tone:"blue",h:"📰 Launch a weekly 'New Coral Drops' newsletter",m:"You list fresh WYSIWYG corals constantly",rec:"Turn your drop photography into an owned channel — give subscribers an early-access window before public listing. Builds a list you own and lifts non-paid sales."});
+  let metaShare=null; try{ const ch=((DATA.windows&&DATA.windows["12"])||{}).channels||[]; const tot=ch.reduce((a,x)=>a+(x.sales||x.value||0),0); const meta=ch.find(x=>/meta|facebook|fb|ig|instagram/i.test(x.name||x.label||"")); if(tot&&meta) metaShare=(meta.sales||meta.value)/tot*100; }catch(e){}
+  cards.push({tone:"blue",h:"🎯 Diversify beyond paid Meta",m:metaShare!=null?("Meta drives ~"+metaShare.toFixed(0)+"% of attributed sales"):"Meta is your only paid channel",rec:"Add organic Reels/TikTok of livestock under the lights, a YouTube 'coral room tour', and SEO pages for your top species. Lowers blended CAC and cuts ad dependence."});
+  cards.push({tone:"blue",h:"💎 Merchandise your showpieces",m:"Catalog runs up to ~$1,600 corals",rec:"Build a 'collector' email segment and run livestream auctions for high-AOV Acanthophyllia/torches — lifts AOV and moves premium stock without buying more traffic."});
+  if(lw.cvr!=null && +lw.cvr<0.5) cards.push({tone:"blue",h:"🛒 Close the browse-to-buy gap",m:"Site CVR ~"+(+lw.cvr).toFixed(2)+"%",rec:"Plenty of add-to-carts aren't converting — test express checkout, a DOA/arrive-alive guarantee badge, live arrival photos, and bundled shipping to push carts over the line."});
+  box.innerHTML=cards.map(c=>"<div class='ins "+c.tone+"'><div class='h'>"+c.h+"</div><div class='m'>"+c.m+"</div><div class='rec'>"+c.rec+"</div></div>").join("");
+}
 function renderScale(){
   const W=DATA.weekly; if(!W||W.length<4) return;
   const TARGET=3.0, BREAKEVEN=2.0;
@@ -277,6 +325,118 @@ function renderScale(){
     +caveat
   +"</div>";
   document.getElementById("scaleMeter").innerHTML=html;
+}
+
+/* ===== Momentum v2: tabbed windows from daily2 ===== */
+const MOMROWS=[
+ {label:"ROAS / efficiency", tiles:["roasAds","roasEcomm","roasNC","roasBlended"]},
+ {label:"Spend · Orders · Sales", tiles:["spend","orders","sales"]},
+ {label:"Funnel", tiles:["atc","cvr","aov","retrate"]},
+ {label:"Audience", tiles:["users","sessions","bounce"]},
+ {label:"Engagement", tiles:["pages","time"]},
+];
+const TILE={
+ roasAds:{name:"Ads ROAS",fmt:x=>(+x).toFixed(2)+"×",good:true,calc:m=>m.roasAds},
+ roasEcomm:{name:"eComm ROAS",fmt:x=>(+x).toFixed(2)+"×",good:true,calc:m=>m.roasEcomm},
+ roasNC:{name:"NC ROAS",fmt:x=>(+x).toFixed(2)+"×",good:true,calc:m=>m.roasNC},
+ roasBlended:{name:"Blended ROAS",fmt:x=>"—",good:true,calc:m=>null,pending:true},
+ spend:{name:"Spend",fmt:x=>money(x),neutral:true,calc:m=>m.spend},
+ orders:{name:"Orders",fmt:x=>intf(x),good:true,calc:m=>m.orders},
+ sales:{name:"Sales",fmt:x=>money(x),good:true,calc:m=>m.sales},
+ atc:{name:"ATC %",fmt:x=>(+x).toFixed(1)+"%",good:true,calc:m=>m.atc},
+ cvr:{name:"CVR %",fmt:x=>(+x).toFixed(2)+"%",good:true,calc:m=>m.cvr},
+ aov:{name:"AOV",fmt:x=>money2(x),good:true,calc:m=>m.aov},
+ retrate:{name:"Returning cust. rate",fmt:x=>(+x).toFixed(1)+"%",good:true,calc:m=>m.retRate},
+ users:{name:"Users",fmt:x=>intf(x),good:true,calc:m=>m.users},
+ sessions:{name:"Sessions",fmt:x=>intf(x),good:true,calc:m=>m.ssn},
+ bounce:{name:"Bounce rate",fmt:x=>(+x).toFixed(1)+"%",good:false,calc:m=>m.bounce},
+ pages:{name:"Avg pages / visit",fmt:x=>(+x).toFixed(2),good:true,calc:m=>m.pages},
+ time:{name:"Avg time on site",fmt:x=>dur(x),good:true,calc:m=>m.time},
+};
+function aggWin(from,to){
+ let s=0,o=0,sp=0,net=0,U=0,SS=0,bw=0,dw=0,pw=0,atc=0,comp=0,cl=0,im=0,cu=0,re=0,nc=0;
+ for(const d of DATA.daily2){ if(d.date>=from&&d.date<=to){
+   s+=d.sales;o+=d.orders;sp+=d.spend;net+=d.net;U+=d.users;SS+=d.ssn;
+   bw+=d.bounce*d.users; dw+=d.dur*d.ssn; pw+=d.pages*d.ssn; atc+=d.atc; comp+=d.comp;
+   cl+=d.clicks; im+=d.impr; cu+=d.cust; re+=d.ret;
+   if(d.cust>0) nc += d.net*((d.cust-d.ret)/d.cust);
+ }}
+ const cogs=(DATA.config&&DATA.config.cogsPct)||0.4;
+ return {sales:s,orders:o,spend:sp,net:net,users:U,ssn:SS,
+  bounce:U?bw/U:0, time:SS?dw/SS:0, pages:SS?pw/SS:0,
+  atc:SS?atc/SS*100:0, cvr:SS?comp/SS*100:0, aov:o?s/o:0,
+  retRate:cu?re/cu*100:0, ctr:im?cl/im*100:0,
+  roasAds:sp?s/sp:0, roasEcomm:sp?(net*(1-cogs)-sp)/sp:0, roasNC:sp?nc/sp:0, cust:cu,ret:re};
+}
+function winRange(key){
+ const max=DATA.daily2[DATA.daily2.length-1].date;
+ if(key==="mtd"){
+   const p=max.split("-").map(Number); const Y=p[0],M=p[1],D=p[2];
+   const pad=n=>String(n).padStart(2,"0");
+   const cF=Y+"-"+pad(M)+"-01", cT=max;
+   let pY=Y,pM=M-1; if(pM<1){pM=12;pY--;}
+   const dim=new Date(pY,pM,0).getDate(); const pd=Math.min(D,dim);
+   const pF=pY+"-"+pad(pM)+"-01", pT=pY+"-"+pad(pM)+"-"+pad(pd);
+   return {cF,cT,pF,pT,label:"· "+mlabel(cF)+" MTD ("+D+"d) vs "+mlabel(pF)+" same span"};
+ }
+ const N=+key, cT=max, cF=addDays(max,-(N-1)), pT=addDays(cF,-1), pF=addDays(pT,-(N-1));
+ return {cF,cT,pF,pT,label:"· last "+N+" days vs prior "+N+" ("+cF+" → "+cT+")"};
+}
+function pctChg(c,p){ return (p===0||p==null||c==null)?null:(c-p)/Math.abs(p)*100; }
+function dtxt(c,p){ const ch=pctChg(c,p); return ch==null?"vs last period":(Math.abs(ch)<1?"flat":(ch>0?"up "+Math.abs(ch).toFixed(0)+"%":"down "+Math.abs(ch).toFixed(0)+"%")); }
+function genBlurb(k,m,mp){
+ const cur=TILE[k].calc(m), prev=TILE[k].calc(mp), d=dtxt(cur,prev), up=cur>prev;
+ const cogs=Math.round(((DATA.config&&DATA.config.cogsPct)||0.4)*100);
+ switch(k){
+  case "roasAds": return cur>=3?"Ads returning "+(+cur).toFixed(2)+"× — efficient ("+d+"); scale winners, cap ad-set bumps ~20%.":"At "+(+cur).toFixed(2)+"× ("+d+") — below a 3× target; refresh creative/audiences before scaling.";
+  case "roasEcomm": return "After ~"+cogs+"% COGS + ad spend, every $1 of ads nets "+(+cur).toFixed(2)+"× contribution"+(cur<1?" — thin; lift AOV or ad efficiency.":" — healthy ("+d+").");
+  case "roasNC": return cur>0?"New-customer ROAS "+(+cur).toFixed(2)+"× ("+d+") — prospecting "+(cur>=2?"is paying off, push it.":"is soft; test new hooks/offers."):"No new-customer revenue tracked this period.";
+  case "roasBlended": return "Connect Square to unlock blended store + online ROAS (incl. COGS, fees, payroll).";
+  case "spend": return "Ad spend "+d+" — judge it against ROAS and new-customer growth, not on its own.";
+  case "orders": return up?"Orders "+d+" — demand building.":"Orders "+d+" — check traffic quality and on-site conversion.";
+  case "sales": return up?"Revenue "+d+" — keep momentum; scale what's working.":"Revenue "+d+" — revisit offers/promos and ad allocation.";
+  case "atc": return up?"More carts ("+d+") — product pages & merch are landing.":"Add-to-cart "+d+" — sharpen product photos, pricing and PDP copy.";
+  case "cvr": return up?"Converting better ("+d+") — recent site/offer changes are working.":"Conversion "+d+" — audit checkout, page speed and pricing.";
+  case "aov": return up?"Bigger baskets ("+d+") — bundles / higher-ticket corals working.":"AOV "+d+" — add bundles, a free-ship threshold, feature premium corals.";
+  case "retrate": return up?"More repeat buyers ("+d+") — retention working.":"Repeat rate "+d+" — lean on email/SMS, restock alerts, loyalty.";
+  case "users": return up?"More visitors ("+d+").":"Visitors "+d+" — widen prospecting audiences / boost reach.";
+  case "sessions": return up?"Traffic "+d+".":"Sessions "+d+" — check ad delivery and organic search.";
+  case "bounce": return (cur<prev)?"Bounce improving ("+d+") — landing pages holding attention.":"Bounce "+d+" — tighten ad-to-page match and speed up load.";
+  case "pages": return up?"Deeper browsing ("+d+").":"Fewer pages/visit ("+d+") — improve cross-links & 'related corals'.";
+  case "time": return up?"Longer visits ("+d+").":"Shorter visits ("+d+") — strengthen above-the-fold media & copy.";
+ }
+ return "";
+}
+function genRead(m,mp){
+ const out=[];
+ const ctrUp=m.ctr>mp.ctr,cvrUp=m.cvr>mp.cvr,atcUp=m.atc>mp.atc;
+ if(ctrUp&&cvrUp&&atcUp) out.push("🔥 Creative is resonating — CTR, add-to-cart and conversion are all up. Open Meta Ads, find the winning ads/landing pages, and document exactly what's working, then double down.");
+ else if(!ctrUp&&!cvrUp) out.push("⚠ CTR and conversion both slipped — likely ad fatigue. Refresh Meta creative (new hooks/photos) and rotate ad sets.");
+ if(mp.spend>0 && m.spend>mp.spend*1.15 && m.roasAds<mp.roasAds) out.push("Spend is up "+((m.spend-mp.spend)/mp.spend*100).toFixed(0)+"% while Ads ROAS slipped — add budget more slowly and cut the weakest ad sets first.");
+ if(m.roasAds>=3 && m.sales>mp.sales) out.push("Sales up with ROAS at "+m.roasAds.toFixed(2)+"× — clear room to scale; lean into your best campaigns.");
+ if(m.aov>mp.aov*1.1) out.push("AOV jumped — whatever is lifting basket size (bundles, higher-ticket corals) is worth repeating.");
+ if(!out.length) out.push("Steady period — no major swings. Hold course and keep an eye on ROAS and new-customer growth.");
+ return out.slice(0,2).join(" ");
+}
+function badgeNeutral(cur,prev){ if(!prev) return "<span class='delta flat'>—</span>"; const ch=(cur-prev)/Math.abs(prev)*100; if(Math.abs(ch)<0.5) return "<span class='delta flat'>± 0%</span>"; return "<span class='delta flat'>"+(ch>0?"▲":"▼")+" "+Math.abs(ch).toFixed(0)+"%</span>"; }
+function renderMomentum2(key){
+ if(!DATA.daily2) return;
+ const r=winRange(key), m=aggWin(r.cF,r.cT), mp=aggWin(r.pF,r.pT);
+ const mr=document.getElementById("m-range"); if(mr) mr.textContent=r.label;
+ const rd=document.getElementById("mread"); if(rd) rd.innerHTML="<b>Read of the period:</b> "+genRead(m,mp);
+ let html="";
+ for(const row of MOMROWS){
+   html+="<div class='rowlabel'>"+row.label+"</div><div class='mrow'>";
+   for(const k of row.tiles){
+     const t=TILE[k], cur=t.calc(m), prev=t.calc(mp);
+     let val,bdg,prevtxt;
+     if(t.pending){ val="<span style='color:#9aabb3'>—</span>"; bdg="<span class='delta flat'>needs Square</span>"; prevtxt="&nbsp;"; }
+     else { val=t.fmt(cur); bdg=t.neutral?badgeNeutral(cur,prev):badge2(cur,prev,t.good); prevtxt="prev "+t.fmt(prev); }
+     html+="<div class='tile'><div class='tl'>"+t.name+"</div><div class='tv'>"+val+"</div><div class='td'>"+bdg+"</div><div class='tp'>"+prevtxt+"</div><div class='blurb'>"+genBlurb(k,m,mp)+"</div></div>";
+   }
+   html+="</div>";
+ }
+ document.getElementById("momRows").innerHTML=html;
 }
 
 function renderMomentum(){
@@ -368,7 +528,7 @@ async function load(){
   try{ DATA=await (await fetch("./data.json?ts="+Date.now())).json(); }
   catch(e){ document.getElementById("foot").textContent="Could not load data.json: "+e.message; return; }
   document.getElementById("gen").textContent="updated "+new Date(DATA.meta.generatedAt).toLocaleDateString();
-  if(DATA.meta.source){ const n=document.getElementById("srcnote"); n.style.display="block"; n.textContent=DATA.meta.source; }
+  // source note removed per request
   document.getElementById("foot").textContent="Aquarium Show · data as of "+new Date(DATA.meta.generatedAt).toLocaleDateString();
   document.querySelector("#campTable tbody").innerHTML=(DATA.metaCampaigns||[]).map(c=>
     "<tr><td>"+c.name+"</td><td class='num'>"+money2(c.spend)+"</td></tr>").join("")
@@ -382,8 +542,16 @@ async function load(){
   document.getElementById("pgPrev").addEventListener("click",()=>{prodPage--;renderProdPage();});
   document.getElementById("pgNext").addEventListener("click",()=>{prodPage++;renderProdPage();});
   if(DATA.weekly) renderInsights();
+  renderOppo();
   if(DATA.weekly&&DATA.daily) renderScale();
-  if(DATA.momentum) renderMomentum();
+  // view toggle (Simple / Full / Data)
+  function setView(v){ document.body.className="view-"+v; document.querySelectorAll(".vbtn").forEach(b=>b.classList.toggle("on",b.dataset.view===v)); try{localStorage.setItem("as_view",v);}catch(e){} }
+  document.querySelectorAll(".vbtn").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
+  let v0="full"; try{const s=localStorage.getItem("as_view"); if(s)v0=s;}catch(e){} setView(v0);
+  // momentum window tabs
+  function setWin(k){ document.querySelectorAll(".mtab").forEach(b=>b.classList.toggle("on",b.dataset.w===k)); renderMomentum2(k); try{localStorage.setItem("as_win",k);}catch(e){} }
+  document.querySelectorAll(".mtab").forEach(b=>b.addEventListener("click",()=>setWin(b.dataset.w)));
+  let w0="7"; try{const s=localStorage.getItem("as_win"); if(s)w0=s;}catch(e){} if(DATA.daily2) setWin(w0);
   setPreset("90");
   const sel=document.getElementById("range");
   let wkey=DATA.defaultWindow||"12"; try{const s=localStorage.getItem("as_range"); if(s&&DATA.windows[s])wkey=s;}catch(e){}
